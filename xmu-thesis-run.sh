@@ -9,4 +9,3 @@ xelatex -no-pdf --interaction=nonstopmode ${BASE}
 xelatex --interaction=nonstopmode ${BASE}
 
 okular "${BASE}.pdf"
-

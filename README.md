@@ -1,2 +1,2 @@
-# xmu-thesis-grd
-厦门大学研究生学位论文 LaTeX 模板
+# 厦门大学研究生学位论文 LaTeX 模板
+本模板是基于 [BIT-Thesis v1.5](https://github.com/BIT-thesis/LaTeX-template) 按照[厦门大学研究生学位论文规范](https://gs.xmu.edu.cn/info/1179/1190.htm)进行了修改。Linux 系统可能会缺字体，需要自行下载。建议直接把 Windows 系统下的 Fonts 文件夹里的字体全部复制过来。

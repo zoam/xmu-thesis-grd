@@ -388,7 +388,7 @@
 		{\bfseries \kaishu \zihao{-2} \xmu@value@author}
 	\vskip 30pt
 
-		{\kaishu \zihao{-3}%
+		{\kaishu \zihao{-3}
 			\begin{tabular}{r p{1mm} l}
 				\xmu@label@advisor    &  & \xmu@value@advisor
 				\\
@@ -470,11 +470,11 @@
 }
 
 %% 无页眉页脚
-\fancypagestyle{xmu@empty}{%
+\fancypagestyle{xmu@empty}{
 	\fancyhf{}}
 
 %% 正文页眉页脚
-\fancypagestyle{xmu@headings}{%
+\fancypagestyle{xmu@headings}{
 	\fancyhf{}
 	\fancyfoot[C]{\songti\zihao{5} \thepage}
 
@@ -542,7 +542,7 @@
 {\tablename~\thecontentslabel\quad}{\hspace*{-1.5cm}}
 {\hspace{.5em}\titlerule*{.} \contentspage}
 
-\renewcommand\tableofcontents{%
+\renewcommand\tableofcontents{
 	\if@twocolumn
 		\@restonecoltrue\onecolumn
 	\else
@@ -567,7 +567,7 @@
 \newcommand\ensubsection[1]{\addcontentsline{etoc}{subsection}{\protect\numberline{\thesubsection}#1}}
 \newcommand\ensubsubsection[1]{\addcontentsline{etoc}{subsubsection}{\protect\numberline{\thesubsubsection}#1}}
 
-\newcommand\entableofcontents{%
+\newcommand\entableofcontents{
 	\if@twocolumn
 		\@restonecoltrue\onecolumn
 	\else
