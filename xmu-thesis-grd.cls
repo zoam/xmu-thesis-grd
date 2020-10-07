@@ -39,6 +39,7 @@
 \def\xmu@label@originalitytitle{厦门大学学位论文原创性声明}
 \def\xmu@label@authorsign{声明人~~~~（签名）：}
 \def\xmu@label@supervisorsign{指导教师（签名）：}
+\def\xmu@label@authorsignnew{声明人（签名）：}
 \def\xmu@label@signdate{~~~~~~~~年~~~~月~~~~日}
 \def\xmu@label@originalitycontent{本人呈交的学位论文是本人在导师指导下,独立完成的研究成果。本人在论文写作中参考其他个人或集体已经发表的研究成果，均在文中以适当方式明确标明，并符合法律规范和《厦门大学研究生学术活动规范（试行）》。\par
 	另外，该学位论文为（~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~）课题（组）的研究成果，获得（~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~）课题（组）经费或实验室的资助，在（~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~）实验室完成。（请在以上括号内填写课题或课题组负责人或实验室名称，未有此项声明内容的，可以不作特别声明。）\par
@@ -333,8 +334,11 @@
 %% 封面内容
 \def\xmu@value@schoolserialnumber{10384}
 \def\xmu@value@studentnumber{200215001}
-\ifxmu@doctor{\def\xmu@value@thesistype{硕~~~~士~~~~学~~~~位~~~~论~~~~文}}
-{\def\xmu@value@thesistype{博~~~~士~~~~学~~~~位~~~~论~~~~文}
+\ifxmu@master
+	\def\xmu@value@thesistype{硕~~~~士~~~~学~~~~位~~~~论~~~~文}
+\else 
+	\def\xmu@value@thesistype{博~~~~士~~~~学~~~~位~~~~论~~~~文}
+\fi
 \def\xmu@value@title{资产重组：一个资不抵债国有企业的最佳选择}
 \def\xmu@value@entitle{Capital Reorganization: The Best Choice for A State-Owned Enterprise with Financial Crisis}
 \def\xmu@value@author{作者姓名}
@@ -383,7 +387,7 @@
 	\vskip 35pt
 		{\bfseries \heiti \zihao{-2} \xmu@value@title}
 	\vskip 15pt
-		{\bfseries \zihao{-2} \xmu@value@entitle}
+		{\bfseries \zihao{3} \xmu@value@entitle}
 	\vskip 55pt
 		{\bfseries \kaishu \zihao{-2} \xmu@value@author}
 	\vskip 30pt
@@ -402,7 +406,7 @@
 			\end{tabular}}
 
 	\vskip 100pt
-		{\bfseries \songti \zihao{4} \xmu@value@printdate}
+		{\bfseries \songti \zihao{-4} \xmu@value@printdate}
 \end{center}
 
 \vskip \stretch{0.5}
@@ -447,7 +451,7 @@
 	\vskip 10pt
 		{\songti\zihao{4} \par \xmu@label@copyrightcontent}
 	\vskip 20pt
-	\hspace{8cm}{\zihao{4}\xmu@label@authorsign\par}
+	\hspace{8cm}{\zihao{4}\xmu@label@authorsignnew\par}
 	\vskip 20pt
 	\hspace{8.4cm} {\zihao{4}\xmu@label@signdate}
 
