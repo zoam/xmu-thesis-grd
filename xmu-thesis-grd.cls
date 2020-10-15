@@ -9,6 +9,7 @@
 %% math packages -- conflict with xunicode
 \RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm,mathrsfs}
 \RequirePackage{upgreek} % 直立希腊字母字体
+\RequirePackage[final]{pdfpages}
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{xmu-thesis-grd}[2020/09/30 v1.0 xmu-thesis-grd document class]
@@ -17,9 +18,11 @@
 \newif\ifxmu@master\xmu@masterfalse
 \newif\ifxmu@doctor\xmu@doctorfalse
 \newif\ifxmu@istwoside\xmu@istwosidefalse
+\newif\ifxmu@pdf\xmu@pdffalse
 \DeclareOption{twoside}{\xmu@istwosidetrue}
 \DeclareOption{master}{\xmu@mastertrue}
 \DeclareOption{doctor}{\xmu@doctortrue}
+\DeclareOption{pdf}{\xmu@pdftrue}
 
 \ProcessOptions\relax
 \ifxmu@istwoside
@@ -36,22 +39,24 @@
 \newCJKfontfamily\heiti{SimHei}[AutoFakeSlant,AutoFakeBold]
 
 %% 论文原创性和论文著作权使用声明内容
-\def\xmu@label@originalitytitle{厦门大学学位论文原创性声明}
-\def\xmu@label@authorsign{声明人~~~~（签名）：}
-\def\xmu@label@supervisorsign{指导教师（签名）：}
-\def\xmu@label@authorsignnew{声明人（签名）：}
-\def\xmu@label@signdate{~~~~~~~~年~~~~月~~~~日}
-\def\xmu@label@originalitycontent{本人呈交的学位论文是本人在导师指导下,独立完成的研究成果。本人在论文写作中参考其他个人或集体已经发表的研究成果，均在文中以适当方式明确标明，并符合法律规范和《厦门大学研究生学术活动规范（试行）》。\par
+\def\xmu@label@originality@title{厦门大学学位论文原创性声明}
+\def\xmu@label@originality@authorsign{声明人~~~~（签名）：}
+\def\xmu@label@originality@supervisorsign{指导教师（签名）：}
+\def\xmu@label@originality@signdate{~~~~~~~~年~~~~月~~~~日}
+\def\xmu@label@originality@content{本人呈交的学位论文是本人在导师指导下,独立完成的研究成果。本人在论文写作中参考其他个人或集体已经发表的研究成果，均在文中以适当方式明确标明，并符合法律规范和《厦门大学研究生学术活动规范（试行）》。\par
 	另外，该学位论文为（~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~）课题（组）的研究成果，获得（~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~）课题（组）经费或实验室的资助，在（~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~）实验室完成。（请在以上括号内填写课题或课题组负责人或实验室名称，未有此项声明内容的，可以不作特别声明。）\par
 	本人声明该学位论文不存在剽窃、抄袭等学术不端行为，并愿意承担因学术不端行为所带来的一切后果和法律责任。
 }
-\def\xmu@label@copyrighttitle{厦门大学学位论文著作权使用声明}
-\def\xmu@label@copyrightcontent{本人同意厦门大学根据《中华人民共和国学位条例暂行实施办法》等规定保留和使用此学位论文，并向主管部门或其指定机构送交学位论文（包括纸质版和电子版），允许学位论文进入厦门大学图书馆及其数据库被查阅、借阅。本人同意厦门大学将学位论文加入全国博士、硕士学位论文共建单位数据库进行检索，将学位论文的标题和摘要汇编出版，采用影印、缩印或者其它方式合理复制学位论文。\par
+
+\def\xmu@label@copyright@title{厦门大学学位论文著作权使用声明}
+\def\xmu@label@copyright@content{本人同意厦门大学根据《中华人民共和国学位条例暂行实施办法》等规定保留和使用此学位论文，并向主管部门或其指定机构送交学位论文（包括纸质版和电子版），允许学位论文进入厦门大学图书馆及其数据库被查阅、借阅。本人同意厦门大学将学位论文加入全国博士、硕士学位论文共建单位数据库进行检索，将学位论文的标题和摘要汇编出版，采用影印、缩印或者其它方式合理复制学位论文。\par
 	本学位论文属于：\par
-	（\hspace{5em}）1.经厦门大学保密委员会审查核定的涉密学位论文，于~~~~~~~~年~~~~月~~~~日解密，解密后适用上述授权。\par
-	（\hspace{5em}）2.不涉密，适用上述授权。\par
+	（\hspace{4.5em}） 1.经厦门大学保密委员会审查核定的涉密学位论文，于~~~~~~~~年~~~~月~~~~日解密，解密后适用上述授权。\par
+	（\hspace{4.5em}） 2.不涉密，适用上述授权。\par
 	（请在以上相应括号内打“√”或填上相应内容。涉密学位论文应是已经厦门大学保密委员会审定过的学位论文，未经厦门大学保密委员会审定的学位论文均为公开学位论文。此声明栏不填写的，默认为公开学位论文，均适用上述授权。）
 }
+\def\xmu@label@copyright@authorsign{声明人（签名）：}
+\def\xmu@label@copyright@signdate{~~~~~~~~年~~~~月~~~~日}
 
 %% 定义一些标签 
 \def\xmu@label@abstract{摘~~要}
@@ -371,6 +376,11 @@
 \newpage
 \cleardoublepage
 \thispagestyle{empty}
+\pdfbookmark[0]{封面}{cover}
+
+\ifxmu@pdf
+	\includepdf[pages=-]{pdf_files/cover.pdf}
+\else
 
 {\bfseries \songti \zihao{-4} \noindent \xmu@label@schoolserialnumber \xmu@value@schoolserialnumber}  \\
 {\bfseries \songti \zihao{-4} \xmu@label@studentnumber \xmu@value@studentnumber}
@@ -410,6 +420,9 @@
 \end{center}
 
 \vskip \stretch{0.5}
+	
+\fi
+
 \clearpage
 \if@twoside
 	\thispagestyle{empty}
@@ -422,16 +435,21 @@
 	\cleardoublepage
 	\pdfbookmark[0]{原创性声明}{originality_statement}
 	\thispagestyle{empty}
-	\begin{center}
-		{\bfseries \heiti \zihao{-2} \xmu@label@originalitytitle}
-	\end{center}
-	\vskip 10pt
-		{\songti\zihao{4} \par \xmu@label@originalitycontent}
-	\vskip 20pt
-	\hspace{8cm}{\zihao{4}\xmu@label@authorsign\par}
-	\hspace{8cm}{\zihao{4}\xmu@label@supervisorsign\par}
-	\vskip 20pt
-	\hspace{8.4cm} {\zihao{4}\xmu@label@signdate}
+	
+	\ifxmu@pdf
+		\includepdf[pages=-]{pdf_files/originality_statement.pdf}
+	\else
+		\begin{center}
+			{\bfseries \heiti \zihao{-2} \xmu@label@originality@title}
+		\end{center}
+		\vskip 10pt
+			{\songti\zihao{4} \par \xmu@label@originality@content}
+		\vskip 20pt
+		\hspace{8cm}{\zihao{4}\xmu@label@originality@authorsign\par}
+		\hspace{8cm}{\zihao{4}\xmu@label@originality@supervisorsign\par}
+		\vskip 20pt
+		\hspace{8.4cm} {\zihao{4}\xmu@label@originality@signdate}
+	\fi
 
 	\clearpage
 	\if@twoside
@@ -445,15 +463,21 @@
 	\cleardoublepage
 	\pdfbookmark[0]{著作权使用声明}{copyright_statement}
 	\thispagestyle{empty}
-	\begin{center}
-		{\bfseries \heiti \zihao{-2} \xmu@label@copyrighttitle}
-	\end{center}
-	\vskip 10pt
-		{\songti\zihao{4} \par \xmu@label@copyrightcontent}
-	\vskip 20pt
-	\hspace{8cm}{\zihao{4}\xmu@label@authorsignnew\par}
-	\vskip 20pt
-	\hspace{8.4cm} {\zihao{4}\xmu@label@signdate}
+	
+	\ifxmu@pdf
+		\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
+		
+	\else
+ 		\begin{center}
+			{\bfseries \heiti \zihao{-2} \xmu@label@copyright@title}
+		\end{center}
+		\vskip 10pt
+			{\songti\zihao{4} \par \xmu@label@copyright@content}
+		\vskip 20pt
+		\hspace{8cm}{\zihao{4}\xmu@label@copyright@authorsign\par}
+		\vskip 20pt
+		\hspace{8.4cm} {\zihao{4}\xmu@label@copyright@signdate}
+	\fi
 
 	\clearpage
 	\if@twoside
