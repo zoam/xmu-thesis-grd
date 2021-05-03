@@ -414,11 +414,8 @@
 \renewcommand{\floatpagefraction}{0.60}
 
 %% 定公式、图、表编号格式
-<<<<<<< HEAD
-\renewcommand\theequation{\arabic{chapter}.\arabic{equation}}
-=======
+
 \renewcommand\theequation{\arabic{chapter}--\arabic{equation}}
->>>>>>> 2aaacaa (按照《厦门大学信息学院研究生学位论文写作指南(2021.04)》全面修改模板。)
 \renewcommand\thefigure{\arabic{chapter}.\arabic{figure}}
 \renewcommand\thetable{\arabic{chapter}.\arabic{table}}
 
