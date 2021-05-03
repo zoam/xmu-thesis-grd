@@ -8,31 +8,25 @@
 
 % 默认单面打印 oneside 、硕士论文模板 master
 
-\documentclass[twoside, doctor, pdf]{xmu-thesis-grd}
+\documentclass[twoside, pdf]{xmu-thesis-grd}
 
 % 模板选项： 硕士论文 master； 博士论文 doctor; 直接使用学校doc文档转换的pdf页面 pdf
-
-%==============更改数学字体设置，Latin Modern Math 默认的的确有点细，看个人需要，下面提供一种方法，需要的可以取消注释=========%
-
-% \usepackage[bold-style=ISO]{unicode-math} %采用unicode-math，可以直接输入Unicode公式，当然传统的输入就行
-% \setmathfont{XITS Math}  %目前unicode-math 支持几种数学字体，具体用法可以查看帮助文档，这里采用类似times字体科学数学字体，可以取消注释对比
-
 
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 封面
+%% 封面及其他固定内容的页面
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 中文封面内容
-\title{资产重组：一个资不抵债国有企业的最佳选择}
-\author{某某某}
-\advisor{某某某教授}
-\major{信息与信号处理}
-\submitdate{2021年6月}
-\defenddate{2021年6月}
-\grantdate{2021年6月}
-\printdate{2021年6月}
+% 中文封面内容，如果使用了pdf选项则这些不需要设置
+% \title{资产重组：一个资不抵债国有企业的最佳选择}
+% \author{某某某}
+% \advisor{某某某教授}
+% \major{信息与信号处理}
+% \submitdate{2021年6月}
+% \defenddate{2021年6月}
+% \grantdate{2021年6月}
+% \printdate{2021年6月}
 %\studentnumber{**********}
 
 % 封面
@@ -49,53 +43,45 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frontmatter
 
-% 摘要
-\include{chapters/abstract}
+% 中英文摘要
+\input{chapters/abstract}
 
-%% 符号对照表，可选，如不用可注释掉
-\input{chapters/notations}
-
-% 加入目录
+% 中英文目录
 \tableofcontents
 \entableofcontents
 
-%加入图、表索引(同时取消图表索引中章之间的垂直间隔)
-\makelistoffigures
-\makelistoftables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 正主体部分
+%% 正文主体部分
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
-\include{chapters/chapter1}
+
+\input{chapters/chapter1}
 %\include{chapters/chapter2}
 %\include{chapters/chapter3}
 
-\include{chapters/conclusion}
+\input{chapters/conclusion}
 
-%% 参考文献，五号字，使用 BibTeX，包含参考文献文件.bib
-
-%\bibliography{reference/chap1,reference/chap2} %多个章节的参考文献
+% 参考文献
 \bibliography{reference/chapter1}
+
+% 附录（章节编号重新计算，使用字母进行编号）
+\appendix
+\setappendixnumberformat
+
+\input{chapters/appendix1}
+\input{chapters/appendix2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 后置部分
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% 附录(章节编号重新计算，使用字母进行编号)
-\appendix
-\setappendixnumberformat
-
-\include{chapters/appendix1}
-\include{chapters/appendix2}
-
-%(其后部分无编号)
 \backmatter
 
-% 发表文章目录
-\include{chapters/publications}
-
 % 致谢
-\include{chapters/acknowledgements}
+\input{chapters/acknowledgements}
+
+% 发表文章目录
+\input{chapters/publications}
+
 
 \end{document}
