@@ -487,6 +487,18 @@
 	\fancyhead[CE]{\zihao{5} \songti {\xmu@value@title}}
 }
 
+%% 脚注样式 
+% 设置圈型角标
+\usepackage{pifont}
+\usepackage[hang,flushmargin,perpage,symbol*]{footmisc}
+\DefineFNsymbols{circled}{{\ding{192}}{\ding{193}}{\ding{194}}
+{\ding{195}}{\ding{196}}{\ding{197}}{\ding{198}}{\ding{199}}{\ding{200}}{\ding{201}}}
+\setfnsymbol{circled}
+% 设置角标数字的字体和正文一致，并且1.5字符缩进
+% 尼玛 真是有毒
+\usepackage{scrextend}
+\deffootnote{1.6em}{0em}{\thefootnotemark \enskip}
+
 %% 下一页从偶数页开始
 \newcommand\beginatevenpage{
 	\clearpage
