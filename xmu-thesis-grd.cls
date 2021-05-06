@@ -495,7 +495,6 @@
 {\ding{195}}{\ding{196}}{\ding{197}}{\ding{198}}{\ding{199}}{\ding{200}}{\ding{201}}}
 \setfnsymbol{circled}
 % 设置角标数字的字体和正文一致，并且1.5字符缩进
-% 尼玛 真是有毒
 \usepackage{scrextend}
 \deffootnote{1.6em}{0em}{\thefootnotemark \enskip}
 
