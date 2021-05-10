@@ -679,6 +679,9 @@
 {\def\@noitemerr
 	{\@latex@warning{Empty `publications' environment}}%
 	\endlist}
+\newcommand\publicationpreamble[1]{
+	\item[]\vspace{0.75cm}\hspace{-\labelwidth}{\heiti  \bfseries #1}
+}
 
 %% 致谢 
 \newenvironment{acknowledgements}{
