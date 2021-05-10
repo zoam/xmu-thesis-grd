@@ -665,7 +665,7 @@
 		\setlength{\labelsep}{0.5em}
 		\setlength{\itemsep}{3pt}
 		\setlength{\listparindent}{0in}
-		\setlength{\itemindent}{0in}
+		\setlength{\itemindent}{-2mm}
 		\setlength{\rightmargin}{0in}
 		\@openbib@code
 		\usecounter{enumiv}%
