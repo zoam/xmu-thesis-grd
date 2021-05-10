@@ -236,9 +236,9 @@
 \let\songti\relax
 \let\heiti\relax
 \let\kaishu\relax
-\newCJKfontfamily\songti{SimSun}[AutoFakeSlant,AutoFakeBold]
-\newCJKfontfamily\kaishu{KaiTi}[AutoFakeSlant,AutoFakeBold]
-\newCJKfontfamily\heiti{SimHei}[AutoFakeSlant,AutoFakeBold]
+\newCJKfontfamily\songti{SimSun.ttc}[AutoFakeSlant,AutoFakeBold]
+\newCJKfontfamily\kaishu{SimKai.ttf}[AutoFakeSlant,AutoFakeBold]
+\newCJKfontfamily\heiti{SimHei.ttf}[AutoFakeSlant,AutoFakeBold]
 
 %% 设置英文字体
 \RequirePackage{xltxtra} % \XeTeX Logo
