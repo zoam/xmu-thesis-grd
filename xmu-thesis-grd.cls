@@ -52,6 +52,9 @@
 \def\xmu@label@copyright@authorsign{声明人（签名）：}
 \def\xmu@label@copyright@signdate{~~~~~~~~年~~~~月~~~~日}
 
+%% 学位论文答辩委员会名单
+\def\xmu@label@copyright@title{学位论文答辩委员会名单}
+
 %% 定义一些标签 
 \def\xmu@label@abstract{摘~~~~要}
 \def\xmu@label@compactabstract{摘要}
@@ -182,20 +185,7 @@
 	\pdfbookmark[0]{原创性声明}{originality_statement}
 	\thispagestyle{empty}
 	
-	\ifxmu@pdf
-		\includepdf[pages=-]{pdf_files/originality_statement.pdf}
-	\else
-		\begin{center}
-			{\bfseries \heiti \zihao{-2} \xmu@label@originality@title}
-		\end{center}
-		\vskip 10pt
-			{\songti\zihao{4} \par \xmu@label@originality@contents}
-		\vskip 20pt
-		\hspace{8cm}{\zihao{4}\xmu@label@originality@authorsign\par}
-		\hspace{8cm}{\zihao{4}\xmu@label@originality@supervisorsign\par}
-		\vskip 20pt
-		\hspace{8.4cm} {\zihao{4}\xmu@label@originality@signdate}
-	\fi
+	\includepdf[pages=-]{pdf_files/originality_statement.pdf}
 
 	\clearpage
 	\if@twoside
@@ -210,20 +200,22 @@
 	\pdfbookmark[0]{著作权使用声明}{copyright_statement}
 	\thispagestyle{empty}
 	
-	\ifxmu@pdf
-		\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
-		
-	\else
- 		\begin{center}
-			{\bfseries \heiti \zihao{-2} \xmu@label@copyright@title}
-		\end{center}
-		\vskip 10pt
-			{\songti\zihao{4} \par \xmu@label@copyright@contents}
-		\vskip 20pt
-		\hspace{8cm}{\zihao{4}\xmu@label@copyright@authorsign\par}
-		\vskip 20pt
-		\hspace{8.4cm} {\zihao{4}\xmu@label@copyright@signdate}
+	\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
+
+	\clearpage
+	\if@twoside
+		\thispagestyle{empty}
+		\cleardoublepage
 	\fi
+}
+
+%% 学位论文答辩委员会名单
+\newcommand\makenamelist{
+	\cleardoublepage
+	\pdfbookmark[0]{学位论文答辩委员会名单}{name_list}
+	\thispagestyle{empty}
+	
+	\includepdf[pages=-]{pdf_files/name_list.pdf}
 
 	\clearpage
 	\if@twoside
@@ -659,6 +651,8 @@
 
 %% 在学期间完成的相关学术成果
 \newenvironment{publications}[1]{
+	\zihao{-4}
+	\setlength{\baselineskip}{21pt}
 	\chapter{\xmu@label@publications}
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\sffamily {\thepage}}{chapter.\thechapter}}
 	\markboth{\MakeUppercase\xmu@label@publications}
@@ -667,9 +661,9 @@
 	{\settowidth\labelwidth{\@biblabel{#1}}%
 		\leftmargin\labelwidth
 		\advance\leftmargin\labelsep
-		\setlength{\parsep}{1mm}
+		\setlength{\parsep}{0mm}
 		\setlength{\labelsep}{0.5em}
-		\setlength{\itemsep}{0.05pc}
+		\setlength{\itemsep}{3pt}
 		\setlength{\listparindent}{0in}
 		\setlength{\itemindent}{0in}
 		\setlength{\rightmargin}{0in}
