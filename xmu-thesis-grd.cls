@@ -287,7 +287,7 @@
 			format = {\bfseries \sffamily \heiti \centering \zihao{-3}},
 			pagestyle = {xmu@headings},
 			beforeskip = 34pt,
-			afterskip = 42pt,
+			afterskip = 32pt plus 10pt,
 			fixskip = true,
 			aftername = ~~~~,
 		}
