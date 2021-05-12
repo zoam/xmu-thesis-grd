@@ -64,7 +64,7 @@
 \def\xmu@label@appendix{附录}
 \def\xmu@label@enappendix{Appendix}
 \def\xmu@label@publications{在学期间完成的相关学术成果}
-\def\xmu@label@enpublications{Relevant Academic Achievements Completed During the Aca-\newline demic Period}
+\def\xmu@label@enpublications{Relevant Academic Achievements Completed During the Acad-\newline emic Period}
 \def\xmu@label@reference{参考文献}
 \def\xmu@label@enreference{References}
 \def\xmu@label@acknowledgements{致~~~~谢}
