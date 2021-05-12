@@ -284,10 +284,10 @@
 \ctexset{chapter={
 			name = {第,章},
 			number = {\arabic{chapter}},
-			format = {\bfseries \heiti \centering \zihao{-3}},
+			format = {\bfseries \sffamily \heiti \centering \zihao{-3}},
 			pagestyle = {xmu@headings},
-			beforeskip = 26pt,
-			afterskip = 18pt,
+			beforeskip = 34pt,
+			afterskip = 42pt,
 			fixskip = true,
 			aftername = ~~~~,
 		}
@@ -295,18 +295,18 @@
 
 %% 设置一级章节格式
 \ctexset{section={
-			format={\raggedright \bfseries \heiti \zihao{4}},
-			beforeskip = 26pt,
-			afterskip = 13pt,
+			format={\raggedright \sffamily \bfseries \heiti \zihao{4}},
+			beforeskip = 42pt,
+			afterskip = 21pt,
 			fixskip = true,
 		}
 }
 
 %% 设置二级标题格式 
 \ctexset{subsection={
-			format = {\bfseries \heiti \raggedright \zihao{-4}},
-			beforeskip = 12pt,
-			afterskip = 12pt,
+			format = {\bfseries \sffamily \heiti \raggedright \zihao{-4}},
+			beforeskip = 21pt,
+			afterskip = 21pt,
 			fixskip = true,
 		}
 }
@@ -314,8 +314,8 @@
 %% 设置三节标题格式
 \ctexset{subsubsection={
 			format={\heiti \raggedright \zihao{-4}},
-			beforeskip = 12pt,
-			afterskip = 12pt,
+			beforeskip = 21pt,
+			afterskip = 21pt,
 			fixskip = true,
 		}
 }
@@ -530,20 +530,20 @@
 %% 设置目录各级标题样式
 \RequirePackage{titletoc}
 \titlecontents{chapter}[0pt]
-	{\bfseries \heiti \zihao{4} \setlength{\baselineskip}{25pt}}
+	{\contentsmargin{0mm} \bfseries \heiti \zihao{4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{\bfseries}
-	{\hspace{.5em}\titlerule*{\normalfont.} \thecontentspage}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \thecontentspage}
 \titlecontents{section}[1\ccwd]
-	{\bfseries \heiti \zihao{-4} \setlength{\baselineskip}{25pt}}
+	{\contentsmargin{0mm} \bfseries \heiti \zihao{-4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{\bfseries}
-	{\hspace{.5em}\titlerule*{\normalfont.} \thecontentspage}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \thecontentspage}
 \titlecontents{subsection}[2\ccwd]
-	{\songti \zihao{-4} \setlength{\baselineskip}{25pt}}
+	{\contentsmargin{0mm} \songti \zihao{-4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{}
-	{\hspace{.5em}\titlerule*{.} \thecontentspage}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \thecontentspage}
 	
 %% 中英文目录
 \addtocontents{toc}{\protect\hypersetup{hidelinks}}
@@ -598,9 +598,10 @@
 	\pdfbookmark[0]{Contents}{english_contents}
 	\markboth{\MakeUppercase\encontentsname}{\MakeUppercase\encontentsname}%修改页眉文字
 	
- 	\makeatletter
-	\renewcommand{\@pnumwidth}{0em}%调整右缩进
+	\makeatletter
+	\renewcommand{\@pnumwidth}{0em}% 1.55em
 	\makeatother
+
 	\setlength{\baselineskip}{25pt}
 	\begingroup
 	\raggedright
