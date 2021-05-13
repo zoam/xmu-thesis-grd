@@ -60,11 +60,11 @@
 \def\xmu@label@compactabstract{摘要}
 \def\xmu@label@enabstract{Abstract}
 \def\xmu@label@keywords{关键词：}
-\def\xmu@label@enkeywords{Key Words:~}
+\def\xmu@label@enkeywords{Keywords:~}
 \def\xmu@label@appendix{附录}
 \def\xmu@label@enappendix{Appendix}
 \def\xmu@label@publications{在学期间完成的相关学术成果}
-\def\xmu@label@enpublications{Relevant Academic Achievements Completed During the Acad-\newline emic Period}
+\def\xmu@label@enpublications{Relevant Academic Achievements Completed During the Acad-\linebreak emic Period}
 \def\xmu@label@reference{参考文献}
 \def\xmu@label@enreference{References}
 \def\xmu@label@acknowledgements{致~~~~谢}
@@ -287,7 +287,7 @@
 			format = {\bfseries \sffamily \heiti \centering \zihao{-3}},
 			pagestyle = {xmu@headings},
 			beforeskip = 34pt,
-			afterskip = 32pt plus 10pt,
+			afterskip = 40pt,
 			fixskip = true,
 			aftername = ~~~~,
 		}
@@ -296,7 +296,7 @@
 %% 设置一级章节格式
 \ctexset{section={
 			format={\raggedright \sffamily \bfseries \heiti \zihao{4}},
-			beforeskip = 42pt,
+			beforeskip = 40pt,
 			afterskip = 21pt,
 			fixskip = true,
 		}
