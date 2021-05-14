@@ -20,10 +20,12 @@
 \newif\ifxmu@doctor\xmu@doctorfalse
 \newif\ifxmu@istwoside\xmu@istwosidefalse
 \newif\ifxmu@pdf\xmu@pdffalse
+\newif\ifxmu@compact\xmu@compactfalse
 \DeclareOption{twoside}{\xmu@istwosidetrue}
 \DeclareOption{master}{\xmu@mastertrue}
 \DeclareOption{doctor}{\xmu@doctortrue}
 \DeclareOption{pdf}{\xmu@pdftrue}
+\DeclareOption{compact}{\xmu@compacttrue}
 
 \ProcessOptions\relax
 \ifxmu@istwoside
@@ -59,6 +61,8 @@
 \def\xmu@label@abstract{摘~~~~要}
 \def\xmu@label@compactabstract{摘要}
 \def\xmu@label@enabstract{Abstract}
+\def\xmu@label@abstractincontent{Abstract-Chinese}
+\def\xmu@label@enabstractincontent{Abstract-English}
 \def\xmu@label@keywords{关键词：}
 \def\xmu@label@enkeywords{Keywords:~}
 \def\xmu@label@appendix{附录}
@@ -475,7 +479,7 @@
 	\fancyhf{}
 	\fancyfoot[C]{\songti\zihao{5} \thepage}
 
-	\fancyhead[CO]{\zihao{5} \songti \leftmark}
+	\fancyhead[CO]{\zihao{5} \songti \nouppercase\leftmark}
 	\fancyhead[CE]{\zihao{5} \songti {\xmu@value@title}}
 }
 
@@ -503,11 +507,18 @@
 \newenvironment{abstract}{
 	\cleardoublepage
 	\chapter*{\xmu@label@abstract}
-	\markboth{\xmu@label@compactabstract}{\xmu@label@compactabstract} % 页眉
-	\addcontentsline{toc}{chapter}{\xmu@label@compactabstract}
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  Abstract-Chinese}{\sffamily \thepage}{chapter.\thechapter}}
+	
+	\ifxmu@compact
+		\addcontentsline{toc}{chapter}{\xmu@label@compactabstract} % 将摘要加入到目录中
+		\markboth{\xmu@label@compactabstract}{\xmu@label@compactabstract} % 页眉
+	\else
+		\addcontentsline{toc}{chapter}{\xmu@label@abstract} % 将摘要加入到目录中
+		\markboth{\xmu@label@abstract}{\xmu@label@abstract} % 页眉
+	\fi
+	
+	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
 	\songti\zihao{-4}
-	\setstretch{1.38889}
+	\setstretch{1.38889} % 设置行间距
 }
 
 %% 中文关键词
@@ -519,7 +530,7 @@
 	\CTEXsetup[format+={\bfseries \sffamily \centering \zihao{3}}]{chapter} %暂时修改标题样式
 	\chapter{\xmu@label@enabstract}
 	\CTEXsetup[format+={\bfseries \heiti \centering \zihao{-3}}]{chapter} %恢复回默认的格式
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  Abstract-English}{\sffamily \thepage}{chapter.\thechapter}}
+	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
 	\zihao{-4}
 	\setstretch{1.38889}
 }
@@ -544,7 +555,7 @@
 	{\thecontentslabel\hspace{\ccwd}}
 	{}
 	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \thecontentspage}
-	
+
 %% 中英文目录
 \addtocontents{toc}{\protect\hypersetup{hidelinks}}
 \addtocontents{etoc}{\protect\hypersetup{hidelinks}}
@@ -558,11 +569,17 @@
 	\fi
 	
 	\chapter*{\contentsname}
-	\addcontentsline{toc}{chapter}{\xmu@label@compactcontents} %将英文摘要加入到英文目录中
-	\markboth{\xmu@label@compactcontents}{\xmu@label@compactcontents} % 页眉
+	
+	\ifxmu@compact
+		\markboth{\xmu@label@compactcontents}{\xmu@label@compactcontents} % 页眉
+		\addcontentsline{toc}{chapter}{\xmu@label@compactcontents} %将中文摘要加入到目录中
+	\else
+		\markboth{\xmu@label@contents}{\xmu@label@contents} % 页眉
+		\addcontentsline{toc}{chapter}{\xmu@label@contents} %将中文摘要加入到目录中
+	\fi
 	
 	\makeatletter
-	\renewcommand{\@pnumwidth}{0em}% 1.55em
+	\renewcommand{\@pnumwidth}{0em}
 	\makeatother
 	
 	\@starttoc{toc}%
@@ -596,7 +613,9 @@
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily Contents}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	\chapter*{\sffamily\encontentsname}
 	\pdfbookmark[0]{Contents}{english_contents}
-	\markboth{\MakeUppercase\encontentsname}{\MakeUppercase\encontentsname}%修改页眉文字
+	
+	
+	\markboth{\encontentsname}{\encontentsname}%修改页眉文字
 	
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}% 1.55em
@@ -612,10 +631,12 @@
 
 
 %% 参考文献风格
-\bibliographystyle{reference/GBT7714-2005NLang}
+\RequirePackage{gbt7714}
+\bibliographystyle{gbt7714-numerical} 
+% \bibliographystyle{reference/GBT7714-2005NLang}
 
 %% 引用文献序号的排序与压缩
-\RequirePackage[numbers,square,comma,super,sort&compress]{natbib}
+% \RequirePackage[numbers,square,comma,super,sort&compress]{natbib}
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标引用
 
 %% 参考文献环境
@@ -624,7 +645,7 @@
 	\setlength{\baselineskip}{16pt}
 	\chapter*{\bibname}
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\sffamily \thepage}{chapter.\thechapter}}
-	\markboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+	\markboth{\bibname}{\bibname}%
 	\addcontentsline{toc}{chapter}{\xmu@label@reference}
 	\vspace{3pt}
 	\list{\@biblabel{\@arabic\c@enumiv}}%
@@ -666,7 +687,7 @@
 		\setlength{\labelsep}{0.5em}
 		\setlength{\itemsep}{3pt}
 		\setlength{\listparindent}{0in}
-		\setlength{\itemindent}{-2mm}
+		\setlength{\itemindent}{0in}
 		\setlength{\rightmargin}{0in}
 		\@openbib@code
 		\usecounter{enumiv}%
@@ -681,7 +702,7 @@
 	{\@latex@warning{Empty `publications' environment}}%
 	\endlist}
 \newcommand\publicationpreamble[1]{
-	\item[]\vspace{0.75cm}\hspace{-\labelwidth}{\heiti  \bfseries #1}
+	\item[]\vspace{0.75cm}\hspace{-\labelwidth}\hspace{-\labelsep}{\heiti  \bfseries #1}
 }
 
 %% 致谢 
