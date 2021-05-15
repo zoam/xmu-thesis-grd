@@ -2,23 +2,20 @@
 
 本模板基于 [BIT-Thesis v1.5](https://github.com/BIT-thesis/LaTeX-template) 按照[《厦门大学研究生学位论文规范》](https://gs.xmu.edu.cn/info/1179/1190.htm)和[《厦门大学信息学院研究生学位论文写作指南》](https://informatics.xmu.edu.cn/info/1047/4651.htm)进行了修改。本模板需要安装 TeX Live，并用 XeLaTeX 进行编译。
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
 - [厦门大学研究生学位论文 LaTeX 模板](#厦门大学研究生学位论文-latex-模板)
+  - [使用须知](#使用须知)
   - [更新日志](#更新日志)
-    - [2021.05.14](#20210514)
-    - [2021.05.13](#20210513)
-    - [2021.05.12](#20210512)
-    - [2021.05.10](#20210510)
-    - [2021.05.06](#20210506)
-    - [2021.05.04](#20210504)
-    - [2021.01.24](#20210124)
-    - [2020.10.15](#20201015)
-  - [已知 Bug 汇总](#已知-Bug-汇总)
-  
+  - [已知 Bug 汇总](#已知-bug-汇总)
+
 <!-- /code_chunk_output -->
+
+## 使用须知
+
+- 目前的测试人员都在使用 2020 版的`LaTeX`，如果没有版本的要求建议都在 2020 版下编译。
 
 ## 更新日志
 
@@ -29,7 +26,7 @@
 
 ### 2021.05.13
 
-- 将英文摘要里的 `Key Words` 修正为 `Keywords` 
+- 将英文摘要里的 `Key Words` 修正为 `Keywords`
 - 调整章节标题段前段后值。去掉章标题段后的弹性间隔，防止出现某些情况下章标题与一级标题之间间距过大的情况。
 
 ### 2021.05.12
@@ -87,3 +84,4 @@
 
 - 英文目录中如果标题过长（大于一行）且出现断字现象的时候，该标题的页码有可能会跑到下一行的左边。目前无法做到自动处理，只能在原本需要断字的地方手动插入`-\linebreak`。详见[这里](https://github.com/zoam/xmu-thesis-grd/issues/9)的讨论。
 - 章节标题的段前段后设置可能仍存在问题。无法做到与 Word 模板完全一致，只能做到近似。如果有更合适的值请在[这里](https://github.com/zoam/xmu-thesis-grd/issues/8)进行讨论。
+- 在 2019 版本`texlive`中使用`\RequirePackage{gbt7714}`会报错，建议直接通过 bst 文件引用，bst 下载地址为[https://github.com/CTeX-org/gbt7714-bibtex-style/blob/master/gbt7714-numerical.bst](https://github.com/CTeX-org/gbt7714-bibtex-style/blob/master/gbt7714-numerical.bst)。
