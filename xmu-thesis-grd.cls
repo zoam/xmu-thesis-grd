@@ -264,7 +264,7 @@
 	\ifxmu@pdf
 		\includepdf[pages=-]{pdf_files/name_list.pdf}
 	\else
-		\input{chapters/namelist.tex}
+		\input{chapters/name_list.tex}
 	\fi
 
 	\clearpage
