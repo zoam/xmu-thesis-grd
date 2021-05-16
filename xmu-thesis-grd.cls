@@ -376,7 +376,7 @@
 \RequirePackage{graphicx}
 
 %% 并列子图
-\RequirePackage{subfigure}
+\RequirePackage{subcaption}
 \RequirePackage{wrapfig}
 
 %% 设置图表标题选项
