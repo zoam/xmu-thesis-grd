@@ -218,8 +218,7 @@
 	\cleardoublepage
 	\pdfbookmark[0]{学位论文答辩委员会名单}{name_list}
 	\thispagestyle{empty}
-	
-	\includepdf[pages=-]{pdf_files/name_list.pdf}
+	\input{setting/committee-page}
 
 	\clearpage
 	\if@twoside
@@ -351,6 +350,7 @@
 }
 
 %% 复杂表格
+\RequirePackage{tabularx}
 \RequirePackage{threeparttable}
 \RequirePackage{dcolumn}
 \RequirePackage{multirow}
