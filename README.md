@@ -21,7 +21,7 @@
 
 ### 2021.05.16
 
-- 支持从`chapters/namelist.tex` 文件中直接生成学位论文答辩委员会名单页。注意这种生成方式需要取消 `pdf` 选项，否则将使用 `pdf_files` 文件夹里的 `name_list.pdf`。
+- 支持从`chapters/name_list.tex` 文件中直接生成学位论文答辩委员会名单页。注意这种生成方式需要取消 `pdf` 选项，否则将使用 `pdf_files` 文件夹里的 `name_list.pdf`。
 
 ### 2021.05.14
 
