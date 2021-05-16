@@ -11,6 +11,7 @@
 \RequirePackage{upgreek} % 直立希腊字母字体
 \RequirePackage[final]{pdfpages}
 \RequirePackage{ragged2e}
+\usepackage{tabularx}
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{xmu-thesis-grd}[2021/05/01 v1.1 xmu-thesis-grd document class]
@@ -55,9 +56,10 @@
 \def\xmu@label@copyright@signdate{~~~~~~~~年~~~~月~~~~日}
 
 %% 学位论文答辩委员会名单
-\def\xmu@label@copyright@title{学位论文答辩委员会名单}
+\def\xmu@label@namelist@title{学位论文答辩委员会名单}
 
 %% 定义一些标签 
+\def\xmu@label@namelist{学位论文答辩委员会名单}
 \def\xmu@label@abstract{摘~~~~要}
 \def\xmu@label@compactabstract{摘要}
 \def\xmu@label@enabstract{Abstract}
@@ -77,6 +79,7 @@
 \def\xmu@label@contents{目~~~~录}
 \def\xmu@label@compactcontents{目录}
 \def\xmu@label@encontents{Contents}
+
 
 \def\xmu@value@templateversion{v1.0}
 
@@ -189,8 +192,22 @@
 	\pdfbookmark[0]{原创性声明}{originality_statement}
 	\thispagestyle{empty}
 	
-	\includepdf[pages=-]{pdf_files/originality_statement.pdf}
-
+	\setstretch{2.2}
+	\ifxmu@pdf
+		\includepdf[pages=-]{pdf_files/originality_statement.pdf}
+	\else
+		\begin{center}
+			{\bfseries \heiti \zihao{-2} \xmu@label@originality@title}
+		\end{center}
+		\vskip 10pt
+			{\songti\zihao{4} \par \xmu@label@originality@content}
+		\vskip 20pt
+		\hspace{8cm}{\zihao{4}\xmu@label@originality@authorsign\par}
+		\hspace{8cm}{\zihao{4}\xmu@label@originality@supervisorsign\par}
+		\vskip 20pt
+		\hspace{8.4cm} {\zihao{4}\xmu@label@originality@signdate}
+	\fi
+	
 	\clearpage
 	\if@twoside
 		\thispagestyle{empty}
@@ -204,7 +221,20 @@
 	\pdfbookmark[0]{著作权使用声明}{copyright_statement}
 	\thispagestyle{empty}
 	
-	\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
+	\setstretch{2.2}
+	\ifxmu@pdf
+		\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
+	\else
+ 		\begin{center}
+			{\bfseries \heiti \zihao{-2} \xmu@label@copyright@title}
+		\end{center}
+		\vskip 10pt
+			{\songti\zihao{4} \par \xmu@label@copyright@content}
+		\vskip 20pt
+		\hspace{8cm}{\zihao{4}\xmu@label@copyright@authorsign\par}
+		\vskip 20pt
+		\hspace{8.4cm} {\zihao{4}\xmu@label@copyright@signdate}
+	\fi
 
 	\clearpage
 	\if@twoside
@@ -213,13 +243,29 @@
 	\fi
 }
 
+
+%% 学位论文答辩委员会名单
+\newenvironment{namelist}{
+	\cleardoublepage
+	
+	\thispagestyle{plain}
+	\thispagestyle{empty}
+	
+	\songti\zihao{4}
+	\setstretch{1.58889} % 设置行间距
+}
+
 %% 学位论文答辩委员会名单
 \newcommand\makenamelist{
 	\cleardoublepage
 	\pdfbookmark[0]{学位论文答辩委员会名单}{name_list}
 	\thispagestyle{empty}
 	
-	\includepdf[pages=-]{pdf_files/name_list.pdf}
+	\ifxmu@pdf
+		\includepdf[pages=-]{pdf_files/name_list.pdf}
+	\else
+		\input{chapters/namelist.tex}
+	\fi
 
 	\clearpage
 	\if@twoside
@@ -330,8 +376,6 @@
 %% check pdfTeX mode
 \RequirePackage{ifpdf}
 
-
-
 %% 设置前置
 \renewcommand{\frontmatter}{ % 修改 frontmatter 的页码为大写罗马格式，并调整页面风格
 	\if@openright\cleardoublepage\else\clearpage\fi
@@ -408,6 +452,12 @@
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\bottomfraction}{0.65}
 \renewcommand{\floatpagefraction}{0.60}
+
+%% 去除空间不够换页造成的当前页眉的浮动体之间空隙过大的问题的命令。该命令需要放在浮动体之后。
+\newcommand\nofloatspacing{
+% 	\vfill
+	\rule[\baselineskip]{0pt}{\baselineskip}
+}
 
 %% 定公式、图、表编号格式
 
@@ -498,13 +548,14 @@
 \newcommand\beginatevenpage{
 	\clearpage
 	\if@twoside
-		\thispagestyle{empty}
+		\thispagestyle{xmu@empty}
 		\cleardoublepage
 	\fi
 }
 
 %% 中文摘要
 \newenvironment{abstract}{
+	
 	\cleardoublepage
 	\chapter*{\xmu@label@abstract}
 	
@@ -562,6 +613,7 @@
 
 %% 中文目录
 \renewcommand\tableofcontents{
+	\setstretch{1.58889} % 设置行间距
 	\if@twocolumn
 		\@restonecoltrue\onecolumn
 	\else
@@ -604,6 +656,7 @@
 
 %% 英文目录
 \newcommand\entableofcontents{
+	\setstretch{1.58889} % 设置行间距
 	\if@twocolumn
 		\@restonecoltrue\onecolumn
 	\else

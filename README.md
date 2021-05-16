@@ -1,6 +1,6 @@
 # 厦门大学研究生学位论文 LaTeX 模板
 
-本模板基于 [BIT-Thesis v1.5](https://github.com/BIT-thesis/LaTeX-template) 按照[《厦门大学研究生学位论文规范》](https://gs.xmu.edu.cn/info/1179/1190.htm)和[《厦门大学信息学院研究生学位论文写作指南》](https://informatics.xmu.edu.cn/info/1047/4651.htm)进行了修改。本模板需要安装 TeX Live，并用 XeLaTeX 进行编译。
+本模板基于 [BIT-Thesis v1.5](https://github.com/BIT-thesis/LaTeX-template) 按照[《厦门大学研究生学位论文规范》](https://gs.xmu.edu.cn/info/1179/1190.htm)和[《厦门大学信息学院研究生学位论文写作指南》](https://informatics.xmu.edu.cn/info/1047/4651.htm)进行了修改。本模板需要安装 `TeX Live`，并用 `XeLaTeX` 进行编译。
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
 
@@ -15,7 +15,7 @@
 
 ## 使用须知
 
-- 目前的测试人员都在使用 2020 版的`LaTeX`，如果没有版本的要求建议都在 2020 版下编译。
+- 目前的测试人员都在使用 2020 版的 `TeX Live`，如果没有版本的要求建议都在 2020 版下编译。
 
 ## 更新日志
 
@@ -26,7 +26,7 @@
 
 ### 2021.05.13
 
-- 将英文摘要里的 `Key Words` 修正为 `Keywords`
+- 将英文摘要里的 `Key Words` 修正为 `Keywords`。
 - 调整章节标题段前段后值。去掉章标题段后的弹性间隔，防止出现某些情况下章标题与一级标题之间间距过大的情况。
 
 ### 2021.05.12
@@ -53,12 +53,12 @@
 - 调整页面边距。
 - 调整参考文献段落样式。
 - 调整图表题注样式。
-- 以上修改后的具体样式见`doc`文件夹里的《厦门大学信息学院研究生学位论文写作指南》。
+- 以上修改后的具体样式见 `doc` 文件夹里的《厦门大学信息学院研究生学位论文写作指南》。
 - 去掉不需要的图索引和表索引等部分内容。
 
 ### 2021.01.24
 
-- 修改图片、公式和表格的编号规则为`(章节号.公式号)`。
+- 修改图片、公式和表格的编号规则为 `(章节号.公式号)`。
 
   ```latex
   %% 定公式、图、表编号格式
@@ -69,7 +69,7 @@
 
 ### 2020.10.15
 
-- 加入直接使用生成好的`pdf`文件的选项，提供`pdf`选项直接由官方的`word`格式生成`著作权声明`等。
+- 加入直接使用生成好的 `pdf` 文件的选项，提供 `pdf` 选项直接由官方的 `word` 格式生成 `著作权声明` 等。
 
   ```latex
   %% 若要使用由word转pdf生成的官方样式，则引入主题时配置：
@@ -78,10 +78,10 @@
   \documentclass[twoside, master]{xmu-thesis-grd}
   ```
 
-- 为首页加入`pdf`书签。
+- 为首页加入 `pdf` 书签。
 
 ## 已知 Bug 汇总
 
-- 英文目录中如果标题过长（大于一行）且出现断字现象的时候，该标题的页码有可能会跑到下一行的左边。目前无法做到自动处理，只能在原本需要断字的地方手动插入`-\linebreak`。详见[这里](https://github.com/zoam/xmu-thesis-grd/issues/9)的讨论。
+- 英文目录中如果标题过长（大于一行）且出现断字现象的时候，该标题的页码有可能会跑到下一行的左边。目前无法做到自动处理，只能在原本需要断字的地方手动插入 `-\linebreak`。详见[这里](https://github.com/zoam/xmu-thesis-grd/issues/9)的讨论。
 - 章节标题的段前段后设置可能仍存在问题。无法做到与 Word 模板完全一致，只能做到近似。如果有更合适的值请在[这里](https://github.com/zoam/xmu-thesis-grd/issues/8)进行讨论。
-- 在 2019 版本`texlive`中使用`\RequirePackage{gbt7714}`会报错，建议直接通过 bst 文件引用，bst 下载地址为[https://github.com/CTeX-org/gbt7714-bibtex-style/blob/master/gbt7714-numerical.bst](https://github.com/CTeX-org/gbt7714-bibtex-style/blob/master/gbt7714-numerical.bst)。
+- 在 2019 版本 `TeX Live` 中使用 `\RequirePackage{gbt7714}` 会报错，建议直接通过 bst 文件引用，bst 下载地址为[https://github.com/CTeX-org/gbt7714-bibtex-style/blob/master/gbt7714-numerical.bst](https://github.com/CTeX-org/gbt7714-bibtex-style/blob/master/gbt7714-numerical.bst)。
