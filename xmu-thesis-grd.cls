@@ -634,7 +634,7 @@
 	\fi
 	
 	\chapter*{\contentsname}
-	
+
 	\ifxmu@compact
 		\markboth{\xmu@label@compactcontents}{\xmu@label@compactcontents} % 页眉
 		\addcontentsline{toc}{chapter}{\xmu@label@compactcontents} %将中文摘要加入到目录中
@@ -678,8 +678,8 @@
 
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily Contents}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	\chapter*{\sffamily\encontentsname}
+
 	\pdfbookmark[0]{Contents}{english_contents}
-	
 	
 	\markboth{\encontentsname}{\encontentsname}%修改页眉文字
 	
