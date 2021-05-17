@@ -129,6 +129,7 @@
 
 %% 绘制封面
 \newcommand\makecover{
+	\setstretch{1.78889} % 设置行间距
 	\newpage
 	\cleardoublepage
 	\thispagestyle{empty}
@@ -255,7 +256,6 @@
 	\setstretch{1.58889} % 设置行间距
 }
 
-%% 学位论文答辩委员会名单
 \newcommand\makenamelist{
 	\cleardoublepage
 	\pdfbookmark[0]{学位论文答辩委员会名单}{name_list}
@@ -327,10 +327,11 @@
 			\hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \let\xmu@cleardoublepage\cleardoublepage
 \newcommand{\xmu@clearemptydoublepage}{ % 对于 openright 选项，必须保证章页右开，且如果前章末页内容须清空其页眉页脚。
-	\clearpage{\pagestyle{xmu@empty}\xmu@cleardoublepage}}
+	\clearpage{\pagestyle{xmu@empty}\xmu@cleardoublepage}
+}
 \let\cleardoublepage\xmu@clearemptydoublepage
 
-%% 设置章节格式
+%% 设置章节格式（一倍行距为字体大小 × 1.297(1.3) × 1.25）
 \ctexset{chapter={
 			name = {第,章},
 			number = {\arabic{chapter}},
@@ -341,6 +342,9 @@
 			fixskip = true,
 			aftername = ~~~~,
 		}
+}
+\newcommand\reducespacing{
+	\vspace{-10pt} %用于临时减少章标题的段后值。
 }
 
 %% 设置一级章节格式
@@ -392,6 +396,12 @@
 	\pagenumbering{arabic}
 	\pagestyle{xmu@headings}
 	\setstretch{1.5} %设置正文段落行距
+}
+
+%% 设置后置
+\renewcommand{\backmatter}{%
+	\@mainmatterfalse
+	
 }
 
 %% 复杂表格
@@ -453,14 +463,8 @@
 \renewcommand{\bottomfraction}{0.65}
 \renewcommand{\floatpagefraction}{0.60}
 
-%% 去除空间不够换页造成的当前页眉的浮动体之间空隙过大的问题的命令。该命令需要放在浮动体之后。
-\newcommand\nofloatspacing{
-% 	\vfill
-	\rule[\baselineskip]{0pt}{\baselineskip}
-}
 
 %% 定公式、图、表编号格式
-
 \renewcommand\theequation{\arabic{chapter}--\arabic{equation}}
 \renewcommand\thefigure{\arabic{chapter}.\arabic{figure}}
 \renewcommand\thetable{\arabic{chapter}.\arabic{table}}
@@ -555,7 +559,7 @@
 
 %% 中文摘要
 \newenvironment{abstract}{
-	
+	\setstretch{1.38889} % 设置行间距
 	\cleardoublepage
 	\chapter*{\xmu@label@abstract}
 	
@@ -569,7 +573,6 @@
 	
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
 	\songti\zihao{-4}
-	\setstretch{1.38889} % 设置行间距
 }
 
 %% 中文关键词
@@ -577,13 +580,23 @@
 
 %% 英文摘要
 \newenvironment{enabstract}{
+	\setstretch{1.38889}
 	\cleardoublepage
-	\CTEXsetup[format+={\bfseries \sffamily \centering \zihao{3}}]{chapter} %暂时修改标题样式
+	
+	\ctexset{chapter={ %暂时修改标题样式
+			format = {\bfseries \sffamily \centering \zihao{3}},
+		}
+	}
+	
 	\chapter{\xmu@label@enabstract}
-	\CTEXsetup[format+={\bfseries \heiti \centering \zihao{-3}}]{chapter} %恢复回默认的格式
+	
+	\ctexset{chapter={ %恢复回默认的格式
+			format = {\bfseries \heiti \centering \zihao{-3}}, 
+		}
+	}
+	
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
 	\zihao{-4}
-	\setstretch{1.38889}
 }
 
 %% 英文关键词
@@ -633,7 +646,7 @@
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}
 	\makeatother
-	
+	\reducespacing
 	\@starttoc{toc}%
 	\if@restonecol\twocolumn\fi
 }
@@ -674,14 +687,14 @@
 	\renewcommand{\@pnumwidth}{0em}% 1.55em
 	\makeatother
 
-	\setlength{\baselineskip}{25pt}
-	\begingroup
-	\raggedright
+% 	\setlength{\baselineskip}{25pt}
+	\reducespacing
+% 	\begingroup
+% 	\raggedright
 	\@starttoc{etoc}%
-	\endgroup
+% 	\endgroup
 	\if@restonecol\twocolumn\fi
 }
-
 
 %% 参考文献风格
 \RequirePackage{gbt7714}
@@ -697,6 +710,7 @@
 	\zihao{5}
 	\setlength{\baselineskip}{16pt}
 	\chapter*{\bibname}
+	\reducespacing
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\sffamily \thepage}{chapter.\thechapter}}
 	\markboth{\bibname}{\bibname}%
 	\addcontentsline{toc}{chapter}{\xmu@label@reference}
@@ -778,6 +792,8 @@
 	\renewcommand\theequation{\Alph{chapter}--\arabic{equation}}  % 附录中编号形式是"A-1"的样子
 	\renewcommand\thefigure{\Alph{chapter}--\arabic{figure}}
 	\renewcommand\thetable{\Alph{chapter}--\arabic{table}}
+	
+	\ctexset{chapter={afterskip = 30pt}}
 }
 
 \endinput
