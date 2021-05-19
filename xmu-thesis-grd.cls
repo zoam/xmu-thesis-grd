@@ -281,6 +281,7 @@
 \newCJKfontfamily\songti{SimSun.ttc}[AutoFakeSlant,AutoFakeBold]
 \newCJKfontfamily\kaishu{SimKai.ttf}[AutoFakeSlant,AutoFakeBold]
 \newCJKfontfamily\heiti{SimHei.ttf}[AutoFakeSlant,AutoFakeBold]
+\setCJKmainfont{SimSun}[AutoFakeSlant,AutoFakeBold]
 
 %% 设置英文字体
 \RequirePackage{xltxtra} % \XeTeX Logo
@@ -313,12 +314,12 @@
 	bottom = 3cm,%
 	left = 3cm,%
 	right = 3cm,%
-	headheight = 1cm,%
 	headsep = 0.24cm,% 
 	footskip = 0.8cm%
 ]{geometry}
 
 %% 设置段落间距
+\setlength{\parskip}{0em}
 % \parskip 0.5ex plus 0.25ex minus 0.25ex
 
 %% 删掉偶数页
@@ -367,7 +368,7 @@
 
 %% 设置三节标题格式
 \ctexset{subsubsection={
-			format={\heiti \raggedright \zihao{-4}},
+			format={\bfseries \sffamily \heiti \raggedright \zihao{-4}},
 			beforeskip = 21pt,
 			afterskip = 21pt,
 			fixskip = true,
@@ -465,7 +466,7 @@
 
 
 %% 定公式、图、表编号格式
-\renewcommand\theequation{\arabic{chapter}--\arabic{equation}}
+\renewcommand\theequation{\arabic{chapter}-\arabic{equation}}
 \renewcommand\thefigure{\arabic{chapter}.\arabic{figure}}
 \renewcommand\thetable{\arabic{chapter}.\arabic{table}}
 
@@ -776,8 +777,8 @@
 \newenvironment{acknowledgements}{
 	\cleardoublepage
 	\chapter*{\xmu@label@acknowledgements}
-	\markboth{\xmu@label@compactacknowledgements}{\xmu@label@compactacknowledgements} % 页眉
-	\addcontentsline{toc}{chapter}{\xmu@label@compactacknowledgements}
+	\markboth{\xmu@label@acknowledgements}{\xmu@label@acknowledgements} % 页眉
+	\addcontentsline{toc}{chapter}{\xmu@label@acknowledgements}
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\sffamily \thepage}{chapter.\thechapter}}
 % 	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enacknowledgements}
 	\songti
