@@ -281,7 +281,7 @@
 \newCJKfontfamily\songti{SimSun.ttc}[AutoFakeSlant,AutoFakeBold]
 \newCJKfontfamily\kaishu{SimKai.ttf}[AutoFakeSlant,AutoFakeBold]
 \newCJKfontfamily\heiti{SimHei.ttf}[AutoFakeSlant,AutoFakeBold]
-\setCJKmainfont{SimSun}[AutoFakeSlant,AutoFakeBold]
+\setCJKmainfont{SimSun.ttc}[AutoFakeSlant,AutoFakeBold]
 
 %% 设置英文字体
 \RequirePackage{xltxtra} % \XeTeX Logo
