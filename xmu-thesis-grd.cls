@@ -698,12 +698,13 @@
 }
 
 %% 参考文献风格
-\RequirePackage{gbt7714}
-\bibliographystyle{gbt7714-numerical} 
+% \RequirePackage{gbt7714}
+\bibliographystyle{reference/gbt7714-numerical} 
+% \bibliographystyle{reference/gbt7714-numerical-nosl} % 这个文件没有出版地不详
 % \bibliographystyle{reference/GBT7714-2005NLang}
 
 %% 引用文献序号的排序与压缩
-% \RequirePackage[numbers,square,comma,super,sort&compress]{natbib}
+\RequirePackage[numbers,square,comma,super,sort&compress]{natbib}
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标引用
 
 %% 参考文献环境
