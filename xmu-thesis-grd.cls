@@ -677,10 +677,11 @@
 		\@restonecolfalse
 	\fi
 
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily Contents}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	\chapter*{\sffamily\encontentsname}
 
-	\pdfbookmark[0]{Contents}{english_contents}
+	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
+
+	\pdfbookmark[0]{\encontentsname}{english_contents}
 	
 	\markboth{\encontentsname}{\encontentsname}%修改页眉文字
 	
