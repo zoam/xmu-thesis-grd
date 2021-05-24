@@ -660,11 +660,12 @@
 \newcommand\entableofcontents{
 	\setstretch{1.58889} % 设置行间距
 
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	\chapter*{\sffamily\encontentsname}
-
+	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
+	
 	\pdfbookmark[0]{\encontentsname}{english_contents}
 	
+
 	\markboth{\encontentsname}{\encontentsname}%修改页眉文字
 	
 	\makeatletter
