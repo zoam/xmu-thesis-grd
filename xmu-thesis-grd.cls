@@ -79,8 +79,6 @@
 \def\xmu@label@contents{目~~~~录}
 \def\xmu@label@compactcontents{目录}
 \def\xmu@label@encontents{Contents}
-
-
 \def\xmu@value@templateversion{v1.0}
 
 %% 封面标签
@@ -181,10 +179,6 @@
 	\fi
 
 	\clearpage
-	\if@twoside
-		\thispagestyle{empty}
-		\hbox{}\newpage
-	\fi
 }
 
 %% 绘制原创性声明
@@ -210,10 +204,6 @@
 	\fi
 	
 	\clearpage
-	\if@twoside
-		\thispagestyle{empty}
-		\hbox{}\newpage
-	\fi
 }
 
 %% 论文著作权使用声明
@@ -238,12 +228,7 @@
 	\fi
 
 	\clearpage
-	\if@twoside
-		\thispagestyle{empty}
-		\hbox{}\newpage
-	\fi
 }
-
 
 %% 学位论文答辩委员会名单
 \newenvironment{namelist}{
@@ -268,10 +253,6 @@
 	\fi
 
 	\clearpage
-	\if@twoside
-		\thispagestyle{empty}
-		\hbox{}\newpage
-	\fi
 }
 
 %% 设置中文字体
@@ -320,17 +301,20 @@
 
 %% 设置段落间距
 \setlength{\parskip}{0em}
-% \parskip 0.5ex plus 0.25ex minus 0.25ex
 
-%% 删掉偶数页
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
-			\thispagestyle{xmu@headings}%
-			\hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-\let\xmu@cleardoublepage\cleardoublepage
-\newcommand{\xmu@clearemptydoublepage}{ % 对于 openright 选项，必须保证章页右开，且如果前章末页内容须清空其页眉页脚。
-	\clearpage{\pagestyle{xmu@empty}\xmu@cleardoublepage}
+%% 让空白页前后页码连续
+\newcounter{blankpage}
+\def\cleardoublepage{
+	\clearpage
+	\if@twoside 
+		\ifodd 
+			\c@page 
+		\else
+			\stepcounter{blankpage}%
+			\hbox {}\newpage
+		\fi 
+	\fi 
 }
-\let\cleardoublepage\xmu@clearemptydoublepage
 
 %% 设置章节格式（一倍行距为字体大小 × 1.297(1.3) × 1.25）
 \ctexset{chapter={
@@ -346,6 +330,9 @@
 }
 \newcommand\reducespacing{
 	\vspace{-10pt} %用于临时减少章标题的段后值。
+}
+\newcommand\adjustafterskip{
+	\ctexset{chapter={afterskip = 30pt}}
 }
 
 %% 设置一级章节格式
@@ -385,7 +372,10 @@
 \renewcommand{\frontmatter}{ % 修改 frontmatter 的页码为大写罗马格式，并调整页面风格
 	\if@openright\cleardoublepage\else\clearpage\fi
 	\@mainmatterfalse
-	\pagenumbering{Roman}
+% 	\pagenumbering{Roman}
+	\setcounter{blankpage}{0}
+	\global\c@page \@ne
+	\renewcommand\thepage{\@Roman{\the\numexpr\value{page}-\value{blankpage}\relax}}
 	\pagestyle{xmu@headings}
 }
 
@@ -394,15 +384,23 @@
 \renewcommand{\mainmatter}{ % 修改 mainmatter 的页码为阿拉伯格式，并调整页面风格
 	\if@openright\cleardoublepage\else\clearpage\fi
 	\@mainmattertrue
-	\pagenumbering{arabic}
+% 	\pagenumbering{arabic}
 	\pagestyle{xmu@headings}
 	\setstretch{1.5} %设置正文段落行距
+	\setcounter{blankpage}{0}
+	\global\c@page \@ne
+	\renewcommand\thepage{\@arabic{\the\numexpr\value{page}-\value{blankpage}\relax}}
+	
+	%设置在只包含图表的页面中图表靠上排版
+% 	\makeatletter
+% 	\setlength{\@fptop}{0pt}% default is 0\p@ \@plus 1fil
+% 	\setlength{\@fpsep}{\floatsep}% default is 8\p@ \@plus 2fil
+% 	\makeatother
 }
 
 %% 设置后置
 \renewcommand{\backmatter}{%
 	\@mainmatterfalse
-	
 }
 
 %% 复杂表格
@@ -464,7 +462,6 @@
 \renewcommand{\bottomfraction}{0.65}
 \renewcommand{\floatpagefraction}{0.60}
 
-
 %% 定公式、图、表编号格式
 \renewcommand\theequation{\arabic{chapter}-\arabic{equation}}
 \renewcommand\thefigure{\arabic{chapter}.\arabic{figure}}
@@ -476,33 +473,39 @@
 %% 设置源代码显示格式
 \RequirePackage{listings}
 \lstset{tabsize=4, %
-	frame=shadowbox, %把代码用带有阴影的框圈起来
-	commentstyle=\color{red!50!green!50!blue!50},%浅灰色的注释
-	rulesepcolor=\color{red!20!green!20!blue!20},%代码块边框为淡青色
-	keywordstyle=\color{blue!90}\bfseries, %代码关键字的颜色为蓝色，粗体
-	showstringspaces=false,%不显示代码字符串中间的空格标记
-	stringstyle=\ttfamily, % 代码字符串的特殊格式
-	keepspaces=true, %
-	breakindent=22pt, %
-	numbers=left,%左侧显示行号
-	stepnumber=1,%
-	numberstyle=\tiny, %行号字体用小号
-	basicstyle=\footnotesize, %
-	showspaces=false, %
-	flexiblecolumns=true, %
-	breaklines=true, %对过长的代码自动换行
-	breakautoindent=true,%
-	breakindent=4em, %
-	aboveskip=1em, %代码块边框
+	frame = shadowbox, %把代码用带有阴影的框圈起来
+	commentstyle = \color{red!50!green!50!blue!50},%浅灰色的注释
+	rulesepcolor = \color{red!20!green!20!blue!20},%代码块边框为淡青色
+	keywordstyle = \color{blue!90}\bfseries, %代码关键字的颜色为蓝色，粗体
+	showstringspaces = false,%不显示代码字符串中间的空格标记
+	stringstyle = \ttfamily, % 代码字符串的特殊格式
+	keepspaces = true, %
+	breakindent = 22pt, %
+	numbers = left,%左侧显示行号
+	stepnumber = 1,%
+	numberstyle = \tiny, %行号字体用小号
+	basicstyle = \footnotesize, %
+	showspaces = false, %
+	flexiblecolumns = true, %
+	breaklines = true, %对过长的代码自动换行
+	breakautoindent = true,%
+	breakindent = 4em, %
+	aboveskip = 1em, %代码块边框
 	%% added by http://bbs.ctex.org/viewthread.php?tid=53451
-	fontadjust,
-	captionpos=t,
-	framextopmargin=2pt,framexbottommargin=2pt,abovecaptionskip=-3pt,belowcaptionskip=3pt,
-	xleftmargin=4em,xrightmargin=4em, % 设定listing左右的空白
-	texcl=true,
+	fontadjust, %
+	captionpos = t, %
+	framextopmargin = 2pt, %
+	framexbottommargin = 2pt, %
+	abovecaptionskip = -3pt, %
+	belowcaptionskip = 3pt, %
+	xleftmargin = 4em, %
+	xrightmargin = 4em, % 设定listing左右的空白
+	texcl=true, %
 	% 设定中文冲突，断行，列模式，数学环境输入，listing数字的样式
-	extendedchars=false,columns=flexible,mathescape=true
-	numbersep=-1em
+	extendedchars=false, %
+	columns=flexible, %
+	mathescape=true %
+	numbersep=-1em %
 }
 \renewcommand{\lstlistingname}{代码} %% 重命名Listings标题头
 
@@ -510,15 +513,15 @@
 \RequirePackage{hyperref}
 \hypersetup{
 	bookmarksnumbered,%
-	linktoc=all,
-	colorlinks=true,
-	citecolor=black,
-	filecolor=black,
-	linkcolor=black,
-	linkbordercolor=black,
-	urlcolor=black,
-	plainpages=false,%
-	pdfstartview=FitH
+	linktoc = all,
+	colorlinks = true,
+	citecolor = black,
+	filecolor = black,
+	linkcolor = black,
+	linkbordercolor = black,
+	urlcolor = black,
+	plainpages = false,%
+	pdfstartview = FitH
 }
 
 %% enumerate 列表环境间距调节
@@ -548,15 +551,6 @@
 % 设置角标数字的字体和正文一致，并且1.5字符缩进
 \usepackage{scrextend}
 \deffootnote{1.6em}{0em}{\thefootnotemark \enskip}
-
-%% 下一页从偶数页开始
-\newcommand\beginatevenpage{
-	\clearpage
-	\if@twoside
-		\thispagestyle{xmu@empty}
-		\cleardoublepage
-	\fi
-}
 
 %% 中文摘要
 \newenvironment{abstract}{
@@ -628,11 +622,6 @@
 %% 中文目录
 \renewcommand\tableofcontents{
 	\setstretch{1.58889} % 设置行间距
-	\if@twocolumn
-		\@restonecoltrue\onecolumn
-	\else
-		\@restonecolfalse
-	\fi
 	
 	\chapter*{\contentsname}
 
@@ -649,7 +638,6 @@
 	\makeatother
 	\reducespacing
 	\@starttoc{toc}%
-	\if@restonecol\twocolumn\fi
 }
 \setcounter{secnumdepth}{4}  % 目录显示的章节编号深度 (part 对应 -1)
 \setcounter{tocdepth}{2}     % 目录深度 (part 对应 -1)
@@ -671,15 +659,9 @@
 %% 英文目录
 \newcommand\entableofcontents{
 	\setstretch{1.58889} % 设置行间距
-	\if@twocolumn
-		\@restonecoltrue\onecolumn
-	\else
-		\@restonecolfalse
-	\fi
 
+	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	\chapter*{\sffamily\encontentsname}
-
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 
 	\pdfbookmark[0]{\encontentsname}{english_contents}
 	
@@ -689,13 +671,8 @@
 	\renewcommand{\@pnumwidth}{0em}% 1.55em
 	\makeatother
 
-% 	\setlength{\baselineskip}{25pt}
 	\reducespacing
-% 	\begingroup
-% 	\raggedright
 	\@starttoc{etoc}%
-% 	\endgroup
-	\if@restonecol\twocolumn\fi
 }
 
 %% 参考文献风格
@@ -713,7 +690,6 @@
 	\zihao{5}
 	\setlength{\baselineskip}{16pt}
 	\chapter*{\bibname}
-	\reducespacing
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\sffamily \thepage}{chapter.\thechapter}}
 	\markboth{\bibname}{\bibname}%
 	\addcontentsline{toc}{chapter}{\xmu@label@reference}
@@ -779,10 +755,16 @@
 \newenvironment{acknowledgements}{
 	\cleardoublepage
 	\chapter*{\xmu@label@acknowledgements}
-	\markboth{\xmu@label@acknowledgements}{\xmu@label@acknowledgements} % 页眉
-	\addcontentsline{toc}{chapter}{\xmu@label@acknowledgements}
+	
+	\ifxmu@compact
+		\markboth{\xmu@label@compactacknowledgements}{\xmu@label@compactacknowledgements} % 页眉
+		\addcontentsline{toc}{chapter}{\xmu@label@compactacknowledgements}
+	\else
+		\markboth{\xmu@label@acknowledgements}{\xmu@label@acknowledgements} % 页眉
+		\addcontentsline{toc}{chapter}{\xmu@label@acknowledgements}
+	\fi
+	
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\sffamily \thepage}{chapter.\thechapter}}
-% 	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enacknowledgements}
 	\songti
 }
 
@@ -792,11 +774,9 @@
 
 %% 附录编号样式
 \newcommand\setappendixnumberformat{
-	\renewcommand\theequation{\Alph{chapter}--\arabic{equation}}  % 附录中编号形式是"A-1"的样子
-	\renewcommand\thefigure{\Alph{chapter}--\arabic{figure}}
-	\renewcommand\thetable{\Alph{chapter}--\arabic{table}}
-	
-	\ctexset{chapter={afterskip = 30pt}}
+	\renewcommand\theequation{\Alph{chapter}-\arabic{equation}}  % 附录中编号形式是"A-1"的样子
+	\renewcommand\thefigure{\Alph{chapter}-\arabic{figure}}
+	\renewcommand\thetable{\Alph{chapter}-\arabic{table}}
 }
 
 \endinput
