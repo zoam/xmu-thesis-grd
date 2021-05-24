@@ -183,7 +183,7 @@
 	\clearpage
 	\if@twoside
 		\thispagestyle{empty}
-		\cleardoublepage
+		\hbox{}\newpage
 	\fi
 }
 
@@ -212,7 +212,7 @@
 	\clearpage
 	\if@twoside
 		\thispagestyle{empty}
-		\cleardoublepage
+		\hbox{}\newpage
 	\fi
 }
 
@@ -240,7 +240,7 @@
 	\clearpage
 	\if@twoside
 		\thispagestyle{empty}
-		\cleardoublepage
+		\hbox{}\newpage
 	\fi
 }
 
@@ -270,7 +270,7 @@
 	\clearpage
 	\if@twoside
 		\thispagestyle{empty}
-		\cleardoublepage
+		\hbox{}\newpage
 	\fi
 }
 
@@ -324,7 +324,7 @@
 
 %% 删掉偶数页
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
-			\thispagestyle{empty}%
+			\thispagestyle{xmu@headings}%
 			\hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \let\xmu@cleardoublepage\cleardoublepage
 \newcommand{\xmu@clearemptydoublepage}{ % 对于 openright 选项，必须保证章页右开，且如果前章末页内容须清空其页眉页脚。
