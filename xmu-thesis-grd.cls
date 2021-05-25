@@ -410,6 +410,13 @@
 \RequirePackage{booktabs}
 \newcolumntype{d}[1]{D{.}{.}{#1}}% or D{.}{,}{#1} or D{.}{\cdot}{#1}
 
+%% 算法
+\RequirePackage{algorithm}
+\RequirePackage{algorithmic}
+\floatname{algorithm}{算法}  
+\renewcommand{\algorithmicrequire}{\textbf{输入:}}  
+\renewcommand{\algorithmicensure}{\textbf{输出:}} 
+
 %% 定理
 \theoremstyle{plain}
 \newtheorem{algo}{算法~}[chapter]
@@ -603,17 +610,17 @@
 	{\contentsmargin{0mm} \bfseries \heiti \zihao{4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{\bfseries}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \thecontentspage}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \normalfont{\thecontentspage}}
 \titlecontents{section}[1\ccwd]
 	{\contentsmargin{0mm} \bfseries \heiti \zihao{-4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{\bfseries}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \thecontentspage}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \normalfont{\thecontentspage}}
 \titlecontents{subsection}[2\ccwd]
 	{\contentsmargin{0mm} \songti \zihao{-4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \thecontentspage}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \normalfont{\thecontentspage}}
 
 %% 中英文目录
 \addtocontents{toc}{\protect\hypersetup{hidelinks}}
@@ -665,7 +672,6 @@
 	
 	\pdfbookmark[0]{\encontentsname}{english_contents}
 	
-
 	\markboth{\encontentsname}{\encontentsname}%修改页眉文字
 	
 	\makeatletter
