@@ -610,17 +610,17 @@
 	{\contentsmargin{0mm} \bfseries \heiti \zihao{4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{\bfseries}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \normalfont{\thecontentspage}}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 \titlecontents{section}[1\ccwd]
 	{\contentsmargin{0mm} \bfseries \heiti \zihao{-4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{\bfseries}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \normalfont{\thecontentspage}}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 \titlecontents{subsection}[2\ccwd]
 	{\contentsmargin{0mm} \songti \zihao{-4} \setlength{\baselineskip}{25pt}}
 	{\thecontentslabel\hspace{\ccwd}}
 	{}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} \normalfont{\thecontentspage}}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 
 %% 中英文目录
 \addtocontents{toc}{\protect\hypersetup{hidelinks}}
@@ -628,7 +628,7 @@
 
 %% 中文目录
 \renewcommand\tableofcontents{
-	\setstretch{1.58889} % 设置行间距
+	\setstretch{1} % 设置行间距
 	
 	\chapter*{\contentsname}
 
@@ -665,7 +665,7 @@
 
 %% 英文目录
 \newcommand\entableofcontents{
-	\setstretch{1.58889} % 设置行间距
+	\setstretch{1} % 设置行间距
 
 	\chapter*{\sffamily\encontentsname}
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
