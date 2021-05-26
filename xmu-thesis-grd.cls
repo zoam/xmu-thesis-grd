@@ -589,7 +589,7 @@
 }
 
 %% 中文关键词
-\newcommand\keywords[1]{\vspace{2ex}\noindent{\bfseries\songti\zihao{-4}\xmu@label@keywords} #1}
+\newcommand\keywords[1]{\vspace{2ex}\noindent{\bfseries\songti\zihao{-4}\xmu@label@keywords}\setstretch{1.38889} #1}
 
 %% 英文摘要
 \newenvironment{enabstract}{
@@ -613,7 +613,7 @@
 }
 
 %% 英文关键词
-\newcommand\enkeywords[1]{\vspace{2ex}\noindent{\bfseries\zihao{-4}\xmu@label@enkeywords} #1}
+\newcommand\enkeywords[1]{\vspace{2ex}\noindent{\bfseries\zihao{-4}\xmu@label@enkeywords}\setstretch{1.38889} #1}
 
 %% 设置目录各级标题样式
 \RequirePackage{titletoc}
