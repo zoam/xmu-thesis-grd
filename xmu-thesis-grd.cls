@@ -563,7 +563,18 @@
 \newenvironment{abstract}{
 	\setstretch{1.38889} % 设置行间距
 	\cleardoublepage
+		
+	\ctexset{chapter={ %暂时修改标题样式
+			format = {\heiti \centering \zihao{-3}},
+		}
+	}
+
 	\chapter*{\xmu@label@abstract}
+	
+	\ctexset{chapter={ %恢复回默认的格式
+			format = {\bfseries \heiti \centering \zihao{-3}}, 
+		}
+	}
 	
 	\ifxmu@compact
 		\addcontentsline{toc}{chapter}{\xmu@label@compactabstract} % 将摘要加入到目录中
@@ -586,7 +597,7 @@
 	\cleardoublepage
 	
 	\ctexset{chapter={ %暂时修改标题样式
-			format = {\bfseries \sffamily \centering \zihao{3}},
+			format = {\bfseries \sffamily \centering \zihao{-3}},
 		}
 	}
 	
