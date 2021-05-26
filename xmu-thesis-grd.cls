@@ -650,6 +650,8 @@
 		\markboth{\xmu@label@contents}{\xmu@label@contents} % 页眉
 		\addcontentsline{toc}{chapter}{\xmu@label@contents} %将中文摘要加入到目录中
 	\fi
+
+	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}
@@ -679,7 +681,6 @@
 	\setstretch{1} % 设置行间距
 
 	\chapter*{\sffamily\encontentsname}
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	
 	\pdfbookmark[0]{\encontentsname}{english_contents}
 	
