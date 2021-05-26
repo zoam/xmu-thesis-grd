@@ -15,6 +15,7 @@
 
 ## 使用须知
 
+- 截止日期临近，大家多辛苦一下，都尽量找一下错误，我们这边负责改，不然大家要重新打很麻烦。
 - ~~目前的测试人员都在使用 2020 版的`TeX Live`，如果没有版本的要求建议都在 2020 版下编译~~。
 - 2021 版`TeX Live`可以解决表格后字体加粗问题，详见：[https://github.com/zoam/xmu-thesis-grd/issues/7](https://github.com/zoam/xmu-thesis-grd/issues/7)，建议更新。
 
