@@ -1,8 +1,8 @@
 %%=============================================================================
 %% xmu-thesis-grd.cls for Xiamen University Graduate Thesis
 %% modified by Maozhong Fu
-%% Version: 1.0
-%% Last update: 2020/09/30
+%% Version: 1.2
+%% Last update: 2021/12/28
 %% Based on BIT-thesis at https://github.com/BIT-thesis/LaTeX-template
 %%==============================================================================
 
@@ -14,7 +14,7 @@
 \usepackage{tabularx}
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{xmu-thesis-grd}[2021/05/01 v1.1 xmu-thesis-grd document class]
+\ProvidesClass{xmu-thesis-grd}[2021/12/28 v1.2 xmu-thesis-grd document class]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \newif\ifxmu@master\xmu@masterfalse
@@ -259,22 +259,16 @@
 \let\songti\relax
 \let\heiti\relax
 \let\kaishu\relax
-\newCJKfontfamily\songti{SimSun.ttc}[AutoFakeSlant,AutoFakeBold]
-\newCJKfontfamily\kaishu{SimKai.ttf}[AutoFakeSlant,AutoFakeBold]
-\newCJKfontfamily\heiti{SimHei.ttf}[AutoFakeSlant,AutoFakeBold]
-\setCJKmainfont{SimSun.ttc}[AutoFakeSlant,AutoFakeBold]
+\newCJKfontfamily\songti{SimSun.ttc}[AutoFakeSlant,AutoFakeBold={2}]
+\newCJKfontfamily\kaishu{SimKai.ttf}[AutoFakeSlant,AutoFakeBold={2}]
+\newCJKfontfamily\heiti{SimHei.ttf}[AutoFakeSlant,AutoFakeBold={2}]
+\setCJKmainfont{SimSun.ttc}[AutoFakeSlant,AutoFakeBold={2}]
 
 %% 设置英文字体
 \RequirePackage{xltxtra} % \XeTeX Logo
 \setmainfont{Times New Roman}
 \setsansfont{Arial}
-\setmonofont{Courier New}
-
-%% 不允许断字（如果设置了断字的话，当英文目录标题过长并出现断字的时候，该标题的页码会跑到左边）
-% \tolerance=1
-% \emergencystretch=\maxdimen
-% \hyphenpenalty=10000
-% \hbadness=10000
+\setmonofont{Times New Roman}
 
 %% 中文破折号
 \newcommand{\cndash}{\rule{0.0em}{0pt}\rule[0.35em]{1.4em}{0.05em}\rule{0.2em}{0pt}}
@@ -291,16 +285,18 @@
 %% 页面设置。设置纸张类型、页面边距和页眉、页脚
 \RequirePackage[%
 	paper = a4paper,%
-	top = 3cm,%
+	top = 3.2cm,%
 	bottom = 3cm,%
 	left = 3cm,%
 	right = 3cm,%
-	headsep = 0.24cm,% 
+	headsep = 0.44cm,% 
 	footskip = 0.8cm%
 ]{geometry}
 
 %% 设置段落间距
 \setlength{\parskip}{0em}
+\setlength{\abovedisplayskip}{0em}
+\setlength{\belowdisplayskip}{0em}
 
 %% 让空白页前后页码连续
 \newcounter{blankpage}
@@ -322,24 +318,18 @@
 			number = {\arabic{chapter}},
 			format = {\bfseries \sffamily \heiti \centering \zihao{-3}},
 			pagestyle = {xmu@headings},
-			beforeskip = 34pt,
-			afterskip = 40pt,
+			beforeskip = 15pt,
+			afterskip = 25pt,
 			fixskip = true,
 			aftername = ~~~~,
 		}
-}
-\newcommand\reducespacing{
-	\vspace{-10pt} %用于临时减少章标题的段后值。
-}
-\newcommand\adjustafterskip{
-	\ctexset{chapter={afterskip = 30pt}}
 }
 
 %% 设置一级章节格式
 \ctexset{section={
 			format={\raggedright \sffamily \bfseries \heiti \zihao{4}},
-			beforeskip = 40pt,
-			afterskip = 21pt,
+			beforeskip = 25pt,
+			afterskip = 20pt,
 			fixskip = true,
 		}
 }
@@ -347,8 +337,8 @@
 %% 设置二级标题格式 
 \ctexset{subsection={
 			format = {\bfseries \sffamily \heiti \raggedright \zihao{-4}},
-			beforeskip = 21pt,
-			afterskip = 21pt,
+			beforeskip = 20pt,
+			afterskip = 20pt,
 			fixskip = true,
 		}
 }
@@ -356,8 +346,8 @@
 %% 设置三节标题格式
 \ctexset{subsubsection={
 			format={\bfseries \sffamily \heiti \raggedright \zihao{-4}},
-			beforeskip = 21pt,
-			afterskip = 21pt,
+			beforeskip = 20pt,
+			afterskip = 20pt,
 			fixskip = true,
 		}
 }
@@ -372,7 +362,6 @@
 \renewcommand{\frontmatter}{ % 修改 frontmatter 的页码为大写罗马格式，并调整页面风格
 	\if@openright\cleardoublepage\else\clearpage\fi
 	\@mainmatterfalse
-% 	\pagenumbering{Roman}
 	\setcounter{blankpage}{0}
 	\global\c@page \@ne
 	\renewcommand\thepage{\@Roman{\the\numexpr\value{page}-\value{blankpage}\relax}}
@@ -380,22 +369,15 @@
 }
 
 %% 设置正文
-\RequirePackage{setspace}
+\RequirePackage[nodisplayskipstretch]{setspace}
 \renewcommand{\mainmatter}{ % 修改 mainmatter 的页码为阿拉伯格式，并调整页面风格
 	\if@openright\cleardoublepage\else\clearpage\fi
 	\@mainmattertrue
-% 	\pagenumbering{arabic}
 	\pagestyle{xmu@headings}
 	\setstretch{1.5} %设置正文段落行距
 	\setcounter{blankpage}{0}
 	\global\c@page \@ne
 	\renewcommand\thepage{\@arabic{\the\numexpr\value{page}-\value{blankpage}\relax}}
-	
-	%设置在只包含图表的页面中图表靠上排版
-% 	\makeatletter
-% 	\setlength{\@fptop}{0pt}% default is 0\p@ \@plus 1fil
-% 	\setlength{\@fpsep}{\floatsep}% default is 8\p@ \@plus 2fil
-% 	\makeatother
 }
 
 %% 设置后置
@@ -439,13 +421,14 @@
 \RequirePackage{subcaption}
 \RequirePackage{wrapfig}
 
-%% 设置图表标题选项
+%% 设置图表相关选项
+\RequirePackage{float}
 \RequirePackage{amsmath}
 \RequirePackage{caption}
 \DeclareCaptionLabelSeparator{zhspace}{~~}
 \DeclareCaptionFont{captionfont}{\bfseries \songti \zihao{-4}}
 \captionsetup{
-	font = {captionfont},
+	font = {captionfont,stretch=1.3},
 	labelsep = zhspace,
 }
 \captionsetup[table]{
@@ -456,18 +439,13 @@
 \numberwithin{table}{chapter}
 \captionsetup[figure]{
 	position = bottom,
-	aboveskip = 9pt,
-	belowskip = 9pt,
+	aboveskip = 5pt,
+	belowskip = 0pt,
 }
+\setlength{\textfloatsep}{15pt}
 
 %% 如果插入的图片没有指定扩展名，那么依次搜索下面的扩展名所对应的文件
 \DeclareGraphicsExtensions{.pdf,.eps,.png,.jpg,.jpeg}
-
-%% 将浮动参数设为较宽松的值
-\renewcommand{\textfraction}{0.15}
-\renewcommand{\topfraction}{0.85}
-\renewcommand{\bottomfraction}{0.65}
-\renewcommand{\floatpagefraction}{0.60}
 
 %% 定公式、图、表编号格式
 \renewcommand\theequation{\arabic{chapter}-\arabic{equation}}
@@ -555,6 +533,7 @@
 \DefineFNsymbols{circled}{{\ding{192}}{\ding{193}}{\ding{194}}
 {\ding{195}}{\ding{196}}{\ding{197}}{\ding{198}}{\ding{199}}{\ding{200}}{\ding{201}}}
 \setfnsymbol{circled}
+
 % 设置角标数字的字体和正文一致，并且1.5字符缩进
 \usepackage{scrextend}
 \deffootnote{1.6em}{0em}{\thefootnotemark \enskip}
@@ -563,19 +542,7 @@
 \newenvironment{abstract}{
 	\setstretch{1.38889} % 设置行间距
 	\cleardoublepage
-		
-	% \ctexset{chapter={ %暂时修改标题样式
-	% 		format = {\heiti \centering \zihao{-3}},
-	% 	}
-	% }
-
 	\chapter*{\xmu@label@abstract}
-	
-	% \ctexset{chapter={ %恢复回默认的格式
-	% 		format = {\bfseries \heiti \centering \zihao{-3}}, 
-	% 	}
-	% }
-	
 	\ifxmu@compact
 		\addcontentsline{toc}{chapter}{\xmu@label@compactabstract} % 将摘要加入到目录中
 		\markboth{\xmu@label@compactabstract}{\xmu@label@compactabstract} % 页眉
@@ -595,19 +562,7 @@
 \newenvironment{enabstract}{
 	\setstretch{1.38889}
 	\cleardoublepage
-	
-	\ctexset{chapter={ %暂时修改标题样式
-			format = {\bfseries \sffamily \centering \zihao{-3}},
-		}
-	}
-	
 	\chapter{\xmu@label@enabstract}
-	
-	\ctexset{chapter={ %恢复回默认的格式
-			format = {\bfseries \heiti \centering \zihao{-3}}, 
-		}
-	}
-	
 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
 	\zihao{-4}
 }
@@ -656,7 +611,6 @@
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}
 	\makeatother
-	\reducespacing
 	\@starttoc{toc}%
 }
 \setcounter{secnumdepth}{4}  % 目录显示的章节编号深度 (part 对应 -1)
@@ -684,25 +638,22 @@
 	
 	\pdfbookmark[0]{\encontentsname}{english_contents}
 	
-	\markboth{\encontentsname}{\encontentsname}%修改页眉文字
+	\markboth{\encontentsname}{\encontentsname} % 修改页眉文字
 	
 	\makeatletter
-	\renewcommand{\@pnumwidth}{0em}% 1.55em
+	\renewcommand{\@pnumwidth}{0em}
 	\makeatother
 
-	\reducespacing
 	\@starttoc{etoc}%
 }
 
 %% 参考文献风格
-% \RequirePackage{gbt7714}
+\RequirePackage[sort&compress]{gbt7714}
 \bibliographystyle{reference/gbt7714-numerical} 
-% \bibliographystyle{reference/gbt7714-numerical-nosl} % 这个文件没有出版地不详
-% \bibliographystyle{reference/GBT7714-2005NLang}
+\citestyle{numbers}
 
 %% 引用文献序号的排序与压缩
-\RequirePackage[numbers,square,comma,super,sort&compress]{natbib}
-\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标引用
+\newcommand{\supercite}[1]{{\citestyle{super}\cite{#1}}} % 上标引用
 
 %% 参考文献环境
 \renewenvironment{thebibliography}[1]{
@@ -789,7 +740,7 @@
 
 %% 单位宏包
 \RequirePackage[version=4]{mhchem}
-\RequirePackage{siunitx}
+\RequirePackage[per-mode=symbol]{siunitx}
 
 %% 附录编号样式
 \newcommand\setappendixnumberformat{
