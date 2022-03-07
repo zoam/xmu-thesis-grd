@@ -450,7 +450,7 @@
 \newcommand*{\captionwithsource}[2]{%
 	\caption[{#1}]{#1}%
 	\vspace{6pt}
-	\parbox{\textwidth}{\zihao{-5} {资料来源：} #2}
+	\parbox{\textwidth}{\setstretch{1.2}\zihao{-5}\hspace{2em}#2}
 }
 
 
