@@ -427,6 +427,10 @@
 \RequirePackage{caption}
 \DeclareCaptionLabelSeparator{zhspace}{~~}
 \DeclareCaptionFont{captionfont}{\bfseries \songti \zihao{-4}}
+\DeclareCaptionFont{subcaptionfont}{\songti \zihao{-4}}
+\captionsetup[sub]{
+	font = {subcaptionfont,stretch=1}
+}
 \captionsetup{
 	font = {captionfont,stretch=1.3},
 	labelsep = zhspace,
@@ -443,6 +447,12 @@
 	belowskip = 0pt,
 }
 \setlength{\textfloatsep}{15pt}
+\newcommand*{\captionsource}[2]{%
+	\caption[{#1}]{#1}%
+	\vspace{6pt}
+	\parbox{\textwidth}{\zihao{-5} {资料来源：} #2}
+}
+
 
 %% 如果插入的图片没有指定扩展名，那么依次搜索下面的扩展名所对应的文件
 \DeclareGraphicsExtensions{.pdf,.eps,.png,.jpg,.jpeg}
