@@ -447,7 +447,7 @@
 	belowskip = 0pt,
 }
 \setlength{\textfloatsep}{15pt}
-\newcommand*{\captionsource}[2]{%
+\newcommand*{\captionwithsource}[2]{%
 	\caption[{#1}]{#1}%
 	\vspace{6pt}
 	\parbox{\textwidth}{\zihao{-5} {资料来源：} #2}
