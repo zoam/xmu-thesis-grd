@@ -21,6 +21,9 @@
 
 ## 更新日志
 
+### 2022.05.29
+- 增加缩略词表、符号表、图索引、表索引功能。添加缩略词表和符号表条目的具体操作请参考 [glossaries-cn](https://github.com/zqmillet/glossaries-cn) 的说明文档。
+
 ### 2022.03.07
 - 添加 `captionwithsource` 命令。
 
