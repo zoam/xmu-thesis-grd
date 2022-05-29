@@ -12,6 +12,12 @@
 
 % 模板选项： 硕士论文 master； 博士论文 doctor; 直接使用学校doc文档转换的pdf页面 pdf
 
+% 导入缩写词表
+\input{chapters/acronym_list}
+
+% 导入缩写词表
+\input{chapters/symbol_list}
+
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,6 +59,17 @@
 \tableofcontents
 \entableofcontents
 
+% 缩略词表
+\makeacronymlist
+
+% 符号表
+\makesymbollist
+
+% 图索引
+\makefigurelist
+
+% 表索引
+\maketablelist
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 正文主体部分

@@ -79,6 +79,14 @@
 \def\xmu@label@contents{目~~~~录}
 \def\xmu@label@compactcontents{目录}
 \def\xmu@label@encontents{Contents}
+\def\xmu@label@acronymlist{主要缩略词表}
+\def\xmu@label@symbollist{主要符号表}
+\def\xmu@label@enacronymlist{List of Acronyms}
+\def\xmu@label@ensymbollist{List of Symbols}
+\def\xmu@label@figurelist{图索引}
+\def\xmu@label@enfigurelist{List of Figures}
+\def\xmu@label@tablelist{表索引}
+\def\xmu@label@entablelist{List of Tables}
 \def\xmu@value@templateversion{v1.0}
 
 %% 封面标签
@@ -276,8 +284,8 @@
 %% the setup of ctex package
 \def\contentsname{\xmu@label@contents}
 \def\encontentsname{\xmu@label@encontents}
-\def\listfigurename{\xmu@label@listoffigures}
-\def\listtablename{\xmu@label@listoftables}
+\def\listfigurename{\xmu@label@figurelist}
+\def\listtablename{\xmu@label@tablelist}
 
 %% 当前模板的版本
 \newcommand{\version}{\xmu@value@templateversion}
@@ -285,11 +293,11 @@
 %% 页面设置。设置纸张类型、页面边距和页眉、页脚
 \RequirePackage[%
 	paper = a4paper,%
-	top = 3.2cm,%
+	top = 3.1cm,%
 	bottom = 3cm,%
 	left = 3cm,%
 	right = 3cm,%
-	headsep = 0.44cm,% 
+	headsep = 0.34cm,% 
 	footskip = 0.8cm%
 ]{geometry}
 
@@ -538,14 +546,15 @@
 
 %% 脚注样式 
 % 设置圈型角标
-\usepackage{pifont}
-\usepackage[hang,flushmargin,perpage,symbol*]{footmisc}
+\interfootnotelinepenalty=100000
+\RequirePackage{pifont}
+\RequirePackage[hang,flushmargin,perpage,symbol*]{footmisc}
 \DefineFNsymbols{circled}{{\ding{192}}{\ding{193}}{\ding{194}}
 {\ding{195}}{\ding{196}}{\ding{197}}{\ding{198}}{\ding{199}}{\ding{200}}{\ding{201}}}
 \setfnsymbol{circled}
 
 % 设置角标数字的字体和正文一致，并且1.5字符缩进
-\usepackage{scrextend}
+\RequirePackage{scrextend}
 \deffootnote{1.6em}{0em}{\thefootnotemark \enskip}
 
 %% 中文摘要
@@ -561,7 +570,9 @@
 		\markboth{\xmu@label@abstract}{\xmu@label@abstract} % 页眉
 	\fi
 	
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@abstractincontent}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\thepage}{chapter.\thechapter}}
 	\songti\zihao{-4}
 }
 
@@ -573,12 +584,14 @@
 	\setstretch{1.38889}
 	\cleardoublepage
 	\chapter{\xmu@label@enabstract}
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@enabstractincontent}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\thepage}{chapter.\thechapter}}
 	\zihao{-4}
 }
 
 %% 英文关键词
-\newcommand\enkeywords[1]{\vspace{2ex}\noindent{\bfseries\zihao{-4}\xmu@label@enkeywords}\setstretch{1.38889} #1}
+\newcommand\enkeywords[1]{\vspace{2ex}\noindent{\bfseries\zihao{-4}\xmu@label@enkeywords}\setstretch{1.38889}#1}
 
 %% 设置目录各级标题样式
 \RequirePackage{titletoc}
@@ -598,6 +611,17 @@
 	{}
 	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 
+%% 设置图索引样式
+\titlecontents{figure}[0pt]{\songti\zihao{-4}}
+	{\parbox[t]{1.55cm}{\figurename~\thecontentslabel}}{\hspace*{-1.5cm}}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
+
+%% 设置表索引样式
+\titlecontents{table}[0pt]{\songti\zihao{-4}}
+	{\parbox[t]{1.55cm}{\tablename~\thecontentslabel}}{\hspace*{-1.5cm}}
+	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
+
+
 %% 中英文目录
 \addtocontents{toc}{\protect\hypersetup{hidelinks}}
 \addtocontents{etoc}{\protect\hypersetup{hidelinks}}
@@ -616,7 +640,10 @@
 		\addcontentsline{toc}{chapter}{\xmu@label@contents} %将中文摘要加入到目录中
 	\fi
 
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
+	
+	\addcontentsline{etoc}{chapter}{\sffamily \encontentsname}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}
@@ -630,12 +657,14 @@
 \newcommand\enchapter[1]{\addtocontents{etoc}
 	{\protect\contentsline{chapter}
 		{\protect\numberline{\sffamily Chapter \thechapter}#1}
-		{\sffamily \thepage}{chapter.\thechapter}}
+% 		{\sffamily \thepage}{chapter.\thechapter}}
+		{\thepage}{chapter.\thechapter}}
 }
 \newcommand\ensection[1]{\addtocontents{etoc}
 	{\protect\contentsline{section}
 		{\protect\numberline{\sffamily \thesection}#1}
-		{\sffamily \thepage}{section.\thesection}}
+% 		{\sffamily \thepage}{section.\thesection}}
+		{\thepage}{section.\thesection}}
 }
 \newcommand\ensubsection[1]{\addcontentsline{etoc}{subsection}{\protect\numberline{\thesubsection}#1}}
 \newcommand\ensubsubsection[1]{\addcontentsline{etoc}{subsubsection}{\protect\numberline{\thesubsubsection}#1}}
@@ -657,6 +686,58 @@
 	\@starttoc{etoc}%
 }
 
+\RequirePackage{glossaries-cn}
+
+%% 缩略词表
+\newcommand\makeacronymlist{
+	\setstretch{1.5}
+	\markboth{\xmu@label@acronymlist}{\xmu@label@acronymlist} % 页眉
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@enacronymlist}
+	\printacronymlist
+	
+	\clearpage
+}
+
+%% 符号表
+\newcommand\makesymbollist{
+	\setstretch{1.5}
+	\markboth{\xmu@label@symbollist}{\xmu@label@symbollist} % 页眉
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@ensymbollist}
+	\printsymbollist
+	\clearpage
+}
+
+\glssetup{
+	term list title    = \xmu@label@acronymlist,
+	symbol list title  = \xmu@label@symbollist,
+	list level         = chapter,
+	term color         = black,
+	symbol color       = black,
+	list head distance = -3.6em
+}
+
+
+%% 图索引
+\newcommand\makefigurelist{
+% 	\pdfbookmark[0]{\xmu@label@figurelist}{figure_list}
+	{\renewcommand{\addvspace}[1]{}
+		\listoffigures}
+	\addcontentsline{toc}{chapter}{\xmu@label@figurelist}
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@enfigurelist}
+	
+}
+
+%% 表索引
+\newcommand\maketablelist{
+% 	\pdfbookmark[0]{\xmu@label@tablelist}{table_list}
+	{\renewcommand{\addvspace}[1]{}
+		\listoftables}
+	\addcontentsline{toc}{chapter}{\xmu@label@tablelist}
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@entablelist}
+	
+}
+
+
 %% 参考文献风格
 \RequirePackage[sort&compress]{gbt7714}
 \bibliographystyle{reference/gbt7714-numerical} 
@@ -670,7 +751,9 @@
 	\zihao{5}
 	\setlength{\baselineskip}{16pt}
 	\chapter*{\bibname}
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\sffamily \thepage}{chapter.\thechapter}}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\sffamily \thepage}{chapter.\thechapter}}
+	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enreference}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\thepage}{chapter*.\thepage}}
 	\markboth{\bibname}{\bibname}%
 	\addcontentsline{toc}{chapter}{\xmu@label@reference}
 	\vspace{3pt}
@@ -701,8 +784,11 @@
 \newenvironment{publications}[1]{
 	\zihao{-4}
 	\setlength{\baselineskip}{21pt}
-	\chapter{\xmu@label@publications}
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\sffamily {\thepage}}{chapter.\thechapter}}
+	\chapter*{\xmu@label@publications}
+	\pdfbookmark[0]{在学期间完成的相关学术成果}{publications}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\sffamily {\thepage}}{chapter.\thechapter}}
+	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enpublications}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\thepage}{chapter*.\thepage}}
 	\markboth{\MakeUppercase\xmu@label@publications}
 	{\MakeUppercase\xmu@label@publications}%
 	\list{\@biblabel{\@arabic\c@enumiv}}%
@@ -735,7 +821,7 @@
 \newenvironment{acknowledgements}{
 	\cleardoublepage
 	\chapter*{\xmu@label@acknowledgements}
-	
+	\label{acknowledgements}
 	\ifxmu@compact
 		\markboth{\xmu@label@compactacknowledgements}{\xmu@label@compactacknowledgements} % 页眉
 		\addcontentsline{toc}{chapter}{\xmu@label@compactacknowledgements}
@@ -744,7 +830,9 @@
 		\addcontentsline{toc}{chapter}{\xmu@label@acknowledgements}
 	\fi
 	
-	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\sffamily \thepage}{chapter.\thechapter}}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\sffamily \thepage}{chapter.\thechapter}}
+	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enacknowledgements}
+% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\thepage}{chapter*.\thepage}}
 	\songti
 }
 
