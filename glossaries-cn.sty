@@ -1,0 +1,388 @@
+\RequirePackage{xkeyval}
+\RequirePackage{hyperref}
+\RequirePackage{datagidx}
+\RequirePackage{xparse}
+\RequirePackage{makecell}
+\RequirePackage{xstring}
+\RequirePackage{longtable}
+\RequirePackage{pdftexcmds}
+
+\def\@termlisttitle{Term List}
+\def\@symbollisttitle{Symbol List}
+\def\@listlevel{chapter}
+\def\@termcolor{black}
+\def\@symbolcolor{black}
+\def\@listheaddistance{-2.7em}
+\def\@listheading#1{\chapter{#1}}
+\definecolor{termcolor}{rgb}{0, 0, 1}
+
+\define@key{glssetup}{term list title}{\renewcommand*{\@termlisttitle}{#1}}
+\define@key{glssetup}{symbol list title}{\renewcommand*{\@symbollisttitle}{#1}}
+\define@key{glssetup}{list level}{\renewcommand*{\@listlevel}{#1}\renewcommand{\@listheading}[1]{\csname #1\endcsname*{##1}}}
+\define@key{glssetup}{term color}{\renewcommand*{\@termcolor}{#1}}
+\define@key{glssetup}{symbol color}{\renewcommand*{\@symbolcolor}{#1}}
+\define@key{glssetup}{list head distance}{\renewcommand*{\@listheaddistance}{#1}}
+\NewDocumentCommand{\glssetup}{m}{
+  \setkeys{glssetup}{#1}
+}
+
+\NewDocumentCommand{\TextWithBox}{ >{\SplitList{&}} m }{%
+  \ProcessList{#1}{\abox}%
+}
+
+\NewDocumentCommand{\abox}{m}{%
+  \allowbreak\mbox{#1}%
+}
+
+
+\def\type@term@default{default}
+\def\type@term@noacronym{no acronym}
+\def\type@term@nofullname{no fullname}
+\def\type@term@phrase{phrase}
+\def\type@symbol@default{default}
+\def\type@symbol@hide{hide}
+
+\newgidx{databasetermdefault}{\@termlisttitle}
+\newgidx{databasetermnoacronym}{}
+\newgidx{databasetermnofullname}{}
+\newgidx{databasetermphrase}{}
+\newgidx{databasesymboldefault}{\@symbollisttitle}
+\newgidx{databasesymbolhide}{}
+\newgidx{databaseauxiliary}{}
+
+\DeclareDocumentCommand{\newacronym}{O{default} m m m}{
+  % #1 % TermType
+  % #2 % Label
+  % #3 % FullName
+  % #4 % Description
+  \def\@DescriptionWithoutBox{#4}
+  \StrDel{\@DescriptionWithoutBox}{&}[\@DescriptionWithoutBox]
+  \StrDel{\@DescriptionWithoutBox}{ }[\@DescriptionWithoutBox]
+  \expandafter\protected@edef\csname#2.DescriptionWithoutBox\endcsname{\@DescriptionWithoutBox}
+  
+  \ifnum\pdf@strcmp{#1}{\type@term@default}=\z@
+    \newterm[
+      label       = #2, % Label
+      description = \IfSubStr{#4}{&}{\TextWithBox{#4}}{#4},
+      long        = \csname#2.DescriptionWithoutBox\endcsname,
+      text        = #3, % FullName
+      database    = databasetermdefault
+    ]{#2} % Label
+    \newterm[
+      database    = databaseauxiliary
+    ]{databasetermdefault.#2} % Label
+  \else\ifnum\pdf@strcmp{#1}{\type@term@noacronym}=\z@
+    \newterm[
+      label       = #2, % Label
+      description = \IfSubStr{#4}{&}{\TextWithBox{#4}}{#4},
+      long        = \csname#2.DescriptionWithoutBox\endcsname,
+      text        = #3, % FullName
+      database    = databasetermnoacronym
+    ]{#2} % Label
+    \newterm[
+      database    = databaseauxiliary
+    ]{databasetermnoacronym.#2} % Label
+  \else\ifnum\pdf@strcmp{#1}{\type@term@nofullname}=\z@
+    \newterm[
+      label       = #2, % Label
+      description = \IfSubStr{#4}{&}{\TextWithBox{#4}}{#4},
+      long        = \csname#2.DescriptionWithoutBox\endcsname,
+      text        = #3, % FullName
+      database    = databasetermnofullname
+    ]{#2} % Label
+    \newterm[
+      database    = databaseauxiliary
+    ]{databasetermnofullname.#2} % Label
+  \else\ifnum\pdf@strcmp{#1}{\type@term@phrase}=\z@
+    \newterm[
+      label       = #2, % Label
+      description = \IfSubStr{#4}{&}{\TextWithBox{#4}}{#4},
+      long        = \csname#2.DescriptionWithoutBox\endcsname,
+      text        = #3, % FullName
+      database    = databasetermphrase
+    ]{#2} % Label
+    \newterm[
+      database    = databaseauxiliary
+    ]{databasetermphrase.#2} % Label
+  \else
+    \PackageError{glossaries}
+                 {Wrong Term Type!}
+                 {The type can be default, no acronym, or phrase}%
+  \fi\fi\fi\fi
+}
+
+\DeclareDocumentCommand{\newsymbol}{O{default} m m m}{
+  % #1 % TermType
+  % #2 % Label
+  % #3 % LaTeXCode
+  % #4 % Description
+  \ifnum\pdf@strcmp{#1}{\type@symbol@default}=\z@
+    \newterm[
+      label       = #2, % Label
+      description = #4, % Description
+      text        = \ensuremath{#3}, % LaTeXCode
+      database    = databasesymboldefault
+    ]{#2} % Label
+    \newterm[
+      database    = databaseauxiliary
+    ]{databasesymboldefault.#2} % Label
+  \else\ifnum\pdf@strcmp{#1}{\type@symbol@hide}=\z@
+    \newterm[
+      label       = #2, % Label
+      description = #4, % Description
+      text        = \ensuremath{#3}, % LaTeXCode
+      database    = databasesymbolhide
+    ]{#2} % Label
+    \newterm[
+      database    = databaseauxiliary
+    ]{databasesymbolhide.#2} % Label
+  \else
+    \PackageError{glossaries}
+                 {Wrong Term Type!}
+                 {The type can be default or hide}%
+  \fi\fi
+}
+
+\DeclareDocumentCommand{\IfInDataBase}{m m m m}{%
+  \iftermexists{#2.#1}{#3}{#4}%
+}
+
+\DeclareDocumentCommand{\IfDefaultTerm}{m m m}{%
+  \iftermexists{databasetermdefault.#1}{#2}{#3}%
+}
+
+\DeclareDocumentCommand{\IfNoAcronymTerm}{m m m}{%
+  \iftermexists{databasetermnoacronym.#1}{#2}{#3}%
+}
+
+\DeclareDocumentCommand{\IfNoFullNameTerm}{m m m}{%
+  \iftermexists{databasetermnofullname.#1}{#2}{#3}%
+}
+
+\DeclareDocumentCommand{\IfPhraseTerm}{m m m}{%
+  \iftermexists{databasetermphrase.#1}{#2}{#3}%
+}
+
+\DeclareDocumentCommand{\IfDefaultSymbol}{m m m}{%
+  \iftermexists{databasesymboldefault.#1}{#2}{#3}%
+}
+
+\DeclareDocumentCommand{\IfHideSymbol}{m m m}{%
+  \iftermexists{databasesymbolhide.#1}{#2}{#3}%
+}
+
+\DeclareDocumentCommand{\IfSymbol}{m m m}{%
+  \IfDefaultSymbol{#1}{#2}{\IfHideSymbol{#1}{#2}{#3}}%
+}
+
+
+\renewcommand*{\useentry}[2]{%
+  \datagidx@parse@formatlabel{#1}%
+  \DTLgidxFetchEntry{\datagidx@value}{\datagidx@label}{#2}%
+  \datagidxlink{\datagidx@label}%
+  {%
+    \IfSymbol{#1}%
+    {%
+      \textcolor{\@symbolcolor}{\@datagidx@use@entry{\datagidx@value}}%
+    }{%
+      \textcolor{\@termcolor}{\@datagidx@use@entry{\datagidx@value}}%
+    }%
+  }%
+}
+
+\let\oldgls\gls
+\renewcommand{\gls}[1]{%
+  \IfDefaultTerm{#1}{%
+    \ifentryused{#1}%
+    {\datagidxlink{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Label}}}}%
+    {\datagidxlink{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Description}（\glsdispentry{#1}{Text}，\useentry{#1}{Label}）}}}%
+  }{%
+  \IfNoAcronymTerm{#1}{%
+    \ifentryused{#1}%
+    {\datagidxlink{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Description}}}}%
+    {\datagidxtarget{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Description}（\useentry{#1}{Text}）}}}%
+  }{%
+  \IfNoFullNameTerm{#1}{%
+    \ifentryused{#1}%
+    {\datagidxlink{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Label}}}}%
+    {\datagidxtarget{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Description}（\useentry{#1}{Label}）}}}%
+  }{%
+  \IfPhraseTerm{#1}{%
+    \ifentryused{#1}%
+    {\datagidxlink{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Description}}}}%
+    {\datagidxtarget{#1}{\textcolor{\@termcolor}{\useentry{#1}{Description}}}}%
+  }{%
+  \IfDefaultSymbol{#1}{%
+    \ifentryused{#1}%
+    {\datagidxlink{#1}{\textcolor{\@symbolcolor}{\glsdispentry{#1}{Text}}}}%
+    {\datagidxlink{#1}{\textcolor{\@symbolcolor}{\useentry{#1}{Text}}}}%
+  }{%
+  \IfHideSymbol{#1}{%
+    \ifentryused{#1}%
+    {\datagidxlink{#1}{\textcolor{\@symbolcolor}{\glsdispentry{#1}{Text}}}}%
+    {\datagidxtarget{#1}{\textcolor{\@symbolcolor}{\useentry{#1}{Text}}}}%
+  }{}}}}}}%
+}
+
+\newcommand{\glsintoc}[1]{%
+  \ifcsname#1.DescriptionWithoutBox\endcsname%
+    \texorpdfstring{\protect\datagidxlink{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Description}}}}{\csname#1.DescriptionWithoutBox\endcsname}%
+  \else%
+    \protect\datagidxlink{#1}{\textcolor{\@symbolcolor}{\glsdispentry{#1}{Text}}}%
+  \fi%
+}
+
+
+\newcommand{\glsdesc}[1]{\datagidxlink{#1}{\textcolor{\@termcolor}{\glsdispentry{#1}{Description}}}}
+
+\newcommand{\printacronymlist}{
+  \printterms[
+    database = databasetermdefault,
+    style    = term, 
+    columns  = 1
+  ]{}
+}
+
+\newcommand{\printsymbollist}{
+  \printterms[
+    database = databasesymboldefault,
+    style    = symbol,
+    sort     = {},
+    columns  = 1
+  ]{}
+}
+
+% The following code is used to fit the longtable to \textwidth.
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+
+% The following code is used to redefine the format of acronym when it is used first.
+\makeatletter
+\newcommand*{\datagidx@style@symbol}{%
+  \renewcommand*{\datagidxstart}{
+	  \vspace{-0.7em}
+	  \begin{longtable}{@{\extracolsep{\fill}}cp{12cm}}
+    \Xhline{1pt}
+    符号 & 中文含义 \\\hline\vspace{\@listheaddistance}
+    \endfirsthead
+
+    \Xhline{1pt}
+    符号 & 中文含义 \\\hline
+    \endhead
+
+    \Xhline{1pt}
+    \endfoot
+  }
+  \renewcommand*{\datagidxend}{
+    \end{longtable}
+  }%
+  \renewcommand*{\datagidxitem}{
+    \\\datagidxtarget{\Label}{\Text} & \Description 
+  }
+}
+
+\newcommand*{\datagidx@style@term}{%
+  \renewcommand*{\datagidxstart}{
+    \vspace{-0.7em}
+    \begin{longtable}{@{\extracolsep{\fill}}lp{6cm}p{4cm}}
+    \Xhline{1pt}
+    缩写 & 英文全称 & 中文含义\\\hline\vspace{\@listheaddistance}
+    \endfirsthead
+
+    \Xhline{1pt}
+    缩写 & 英文全称 & 中文含义\\\hline
+    \endhead
+
+    \Xhline{1pt}
+    \endfoot
+  }
+  \renewcommand*{\datagidxend}{
+    \end{longtable}
+  }%
+  \renewcommand*{\datagidxitem}{
+    \\\datagidxtarget{\Label}{\Label} & \Text & \Long 
+  }
+}
+
+\renewcommand{\printterms}[1][]{%
+\bgroup
+  \let\newterm@database\datagidx@defaultdatabase
+  \let\newterm@styles\@empty
+  \setkeys{printterms}{#1}%
+  \DTLifdbexists{\newterm@database}%
+  {%
+    \edef\DTLgidxCurrentdb{\newterm@database}%
+    \edef\do@getrow{\noexpand\dtlgetrowforvalue
+      {datagidx}%
+      {\dtlcolumnindex{datagidx}{Glossary}}%
+      {\newterm@database}%
+    }%
+    \do@getrow
+    \dtlgetentryfromcurrentrow
+      {\datagidx@title}%
+      {\dtlcolumnindex{datagidx}{Title}}%
+    \dtlgetentryfromcurrentrow
+      {\datagidx@heading}%
+      {\dtlcolumnindex{datagidx}{Heading}}%
+    \dtlgetentryfromcurrentrow
+      {\datagidx@postheading}%
+      {\dtlcolumnindex{datagidx}{PostHeading}}%
+    \dtlgetentryfromcurrentrow
+      {\datagidx@multicols}%
+      {\dtlcolumnindex{datagidx}{MultiCols}}%
+    \dtlgetentryfromcurrentrow
+      {\datagidx@sort}%
+      {\dtlcolumnindex{datagidx}{Sort}}%
+    \dtlgetentryfromcurrentrow
+      {\datagidx@style}%
+      {\dtlcolumnindex{datagidx}{Style}}%
+    \dtlgetentryfromcurrentrow
+      {\datagidx@showgroups}%
+      {\dtlcolumnindex{datagidx}{ShowGroups}}%
+    \edef\dtl@do@setkeys{\noexpand\setkeys{newgloss}{\expandonce\newterm@styles}}%
+    \dtl@do@setkeys
+    \ifnum\datagidx@columns>1\relax
+       \edef\datagidx@prestart{%
+        \noexpand\begin{\datagidx@multicols}{\datagidx@columns}%
+       }%
+       \edef\datagidx@postend{%
+        \noexpand\end{\datagidx@multicols}%
+       }%
+    \else
+       \def\datagidx@prestart{}%
+       \def\datagidx@postend{}%
+    \fi
+    \let\@dtl@dbname\DTLgidxCurrentdb
+    \csuse{datagidxshowgroups\datagidx@showgroups}%
+    \datagidxsetstyle{\datagidx@style}%
+    \def\datagidx@labellist{}%
+    \@listheading{\datagidx@title}%
+    \datagidx@postheading
+    \addcontentsline{toc}{\@listlevel}{\datagidx@title}
+    \datagidx@do@sort
+    \datagidx@prestart
+    \datagidxstart
+    \let\DTLgidxName\datagidx@invert
+    \let\DTLgidxPlace\datagidx@invert
+    \let\DTLgidxSubject\datagidx@invert
+    \let\DTLgidxOffice\datagidx@invert
+      \DTLgidxForeachEntry
+      {%
+         \datagidxitem
+      }%
+    \datagidxend
+    \datagidx@postend
+  }%
+  {%
+    \PackageError{datagidx}%
+    {Glossary/index data base `\newterm@database' doesn't exist}%
+    {%
+      You must define the glossary/index data base before you can
+      use it.%
+    }%
+  }%
+\egroup
+}
+\makeatother
+
+
