@@ -787,6 +787,7 @@
 	\chapter*{\xmu@label@publications}
 	\pdfbookmark[0]{在学期间完成的相关学术成果}{publications}
 % 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\sffamily {\thepage}}{chapter.\thechapter}}
+        \addcontentsline{toc}{chapter}{\xmu@label@publications}
 	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enpublications}
 % 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\thepage}{chapter*.\thepage}}
 	\markboth{\MakeUppercase\xmu@label@publications}
