@@ -649,6 +649,7 @@
 	\renewcommand{\@pnumwidth}{0em}
 	\makeatother
 	\@starttoc{toc}%
+	\clearpage
 }
 \setcounter{secnumdepth}{4}  % 目录显示的章节编号深度 (part 对应 -1)
 \setcounter{tocdepth}{2}     % 目录深度 (part 对应 -1)
@@ -684,6 +685,7 @@
 	\makeatother
 
 	\@starttoc{etoc}%
+	\clearpage
 }
 
 \RequirePackage{glossaries-cn}
