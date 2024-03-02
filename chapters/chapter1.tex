@@ -7,14 +7,74 @@
 \chapter{绪论}
 \enchapter{Introduction}
 \label{chap:intro}
-\section{研究背景及选题意义}
-\ensection{Research Background and Motivation}
+\section{研究意义及问题}
+\ensection{Research Significance and Problems}
 
-近年来，随着人们生活水平的不断提高，人们越来越注重周围环境对身体健康的影响。作为服装是人们时时刻刻最贴近的环境，尤其是内衣，对人体健康有很大的影响。由于合时刻刻最贴近的环境，尤其是内衣，对人体健康有很大的影响。由于合成纤维的衣着舒适性、手感性，天然纤维的发展又成为人们关注的一大热点。\supercite{Takahashi1996Structure,Xia2002Analysis,Jiang1989,Mao2000Motion,Feng1998}
+医学图像获取依赖于多种成像技术，包括计算机断层扫描（CT）\supercite{Ludwig2008,JournalNucMedTech2023}、磁共振成像（MRI）、放射性核素扫描和超声波等。这些技术各自揭示了生物组织的独特特征和信息，但也增加了图像的复杂性和多样性。CT成像基于X射线，通过捕捉不同组织对X射线的吸收差异来生成图像。与此相比，MRI利用磁场和无损耗的非离子辐射，对组织中的水分和脂肪进行成像，展现不同的组织特性。这些多样的成像方法提供了不同视角的生物组织图像，有助于更全面地了解人体内部结构和状况。医学图像分割是一项关键任务，旨在从整体医学图像中精确提取和标记出特定的结构或区域。这包括对器官、病变、血管等目标的识别和界定。这一过程对于深入理解和分析医学图像至关重要，它为医学研究、疾病诊断和治疗规划提供了关键支持。医学图像分割在定量分析和计算机辅助诊断系统中扮演着核心角色，使得对复杂医学图像的解读更加精确和高效。然而医学图像分割的数据标注过程通常需要耗费大量的人力和时间，且标注结果的质量和准确性往往受到标注者的经验和主观因素的影响。此外，医学图像的数据通常涉及隐私和安全问题，这也使得数据的共享和使用受到了严格的限制。因此，如何利用有限的标注数据并且保护数据隐私的情况下，实现医学图像分割的高效和精确成为了一个重要的研究问题。
+
+为了在医学图像分割任务中提高效果并保护隐私，联邦学习提供了一种创新的解决方案。这种分布式学习方法的核心优势在于它允许多个数据持有者在不共享数据的前提下共同训练模型。虽然联邦学习一定程度上缓解了数据不足的问题，但在面对标注数据不足的挑战时，还可以采用自监督学习、半监督学习和迁移学习等策略。结合联邦学习和这些学习策略的应用，不仅能有效利用有限的标注数据提升模型性能，这还与OpenAI提出的模型scaling laws相契合，因为根据这些定律，大规模预训练模型往往需要大量的数据，而为大量数据进行标注在实际操作中并不可行。因此，这种结合联邦学习和以上各种学习策略的方法已成为实现医学图像分割的高效、精确且成本效益高的重要途径。
+
+然而，该方向上仍存在以下亟待研究的关键问题：
+* 在模型规模日趋庞大的情况下，之前的联邦学习框架都不能实现大规模模型的高效训练。这是因为联邦学习的核心特点是在不共享数据的前提下进行模型训练，这就意味着在联邦学习框架下，模型的训练数据是分布在多个数据持有者的设备上的，而这些设备的计算能力和存储能力往往是有限的。因此，如何在这种情况下实现高效的模型训练是一个重要的研究问题。
+* 由于未标注数据和标注数据，不同的联邦学习参与者的数据分布往往是不同的，对模型性能有着不同程度的损害。如何消除这些非独立同分布的数据对模型训练的影响也是一个重要的研究问题。
+* scaling laws在大量的其他领域被验证是正确的，如何利用这一规律来指导医学图像分割模型的训练是一个重要的研究问题。因为对于医学图像分割这一领域而言，对于精度的要求往往是非常高的，因此扩大模型的规模来获得更好的性能受益是非常有意义的。
+
 
 \section{国内外研究现状}
 \ensection{Research Progress Overview in Home and Abroad}
+
+
+% \label{intro}
+
+传统的集中式学习要求将在本地设备（如手机）上收集的所有数据集中存储在数据中心或云服务器上。这一要求不仅提出了隐私风险和数据泄露的担忧，而且当数据量巨大时，对服务器的存储和计算能力提出了高要求。尽管分布式数据并行\supercite{dean2012large}，它允许多台机器并行训练具有不同数据组的模型副本，可能作为解决存储和计算能力问题的潜在解决方案，但它仍需要访问整个训练数据以将其分割成均匀分布的片段，导致可能对数据的安全和隐私问题。
+
+联邦学习（FL）旨在训练一个全局模型，该模型可以在不同设备上分布的数据上进行训练，同时保护数据隐私。2016年，McMahan等人\supercite{mcmahan2017communication}首次介绍了基于数据并行性的FL概念，并提出了一种联邦平均（FedAvg）算法。作为一种去中心化的机器学习方法，FedAvg允许多个设备合作训练机器学习模型，同时保持用户数据本地存储。FedAvg免除了将用户的敏感数据上传到集中式服务器的需要，并使得边缘设备能够在自己的本地数据集内部本地训练共享模型。通过聚合本地模型的更新（梯度），FedAvg满足了隐私保护和数据安全的基本要求。
+% 在FedAvg的设置下，有多个边缘设备（称为客户端）存储每个用户的私人数据在本地，并有一个云服务器，可以聚合参与客户端的更新模型参数并生成一个全局共享模型。
+
+虽然FL提供了一种保护隐私的有希望的方法，但与集中式学习相比，当FL应用于现实世界时，许多挑战随之而来\supercite{yang2019federated}。这些挑战包括传输参数所需的通信成本、本地设备所需的计算能力和能源消耗，以及学习过程中可能大量本地设备的异质性和随机性。大量的研究致力于解决上述挑战，包括减少通信成本\supercite{chen2019communication,mcmahan2017communication,mills2019communication,xu2020}，考虑硬件约束的FL\supercite{duan2019astraea,lim2020federated}，以及针对对抗性攻击的额外保护\supercite{kairouz2019advances,254465,zhu2020distributed}。
+
+尽管\supercite{mcmahan2017communication}中的作者声称FedAvg能够在一定程度上应对非独立同分布（Non-IID）数据，但许多研究已经指出，在Non-IID或异构数据上FL的准确性几乎不可避免地会恶化\supercite{zhao2018federated}。性能下降主要可以归因于由于Non-IID导致的本地模型的权重分歧。也就是说，具有相同初始参数的本地模型会由于本地数据分布的异质性而收敛到不同的模型。在FL过程中，通过
+
+平均上传的本地模型获得的共享全局模型与理想模型（当本地设备上的数据是IID时获得的模型）之间的差异持续增加，减缓了收敛速度并恶化了学习性能。
+
+由于对FL的研究兴趣迅速增加，文献中已经发表了几篇有价值的FL综述论文。在\supercite{yang2019federated,ZHANG2021106775}中给出了FL及其应用的一般介绍，\supercite{kairouz2019advances,li2020federated}中详细讨论了进展和挑战。在\supercite{vepakomma2018no,li2019survey,briggs2020review,lyu2020threats}中介绍了FL中的威胁分析和额外的隐私保护技术。也报告了FL应用于物联网和边缘设备\supercite{lan2019introduction,imteaj2020federated,shi2020communication}、无线网络\supercite{hosseinalipour2020federated}、移动设备\supercite{lim2020federated}和医疗保健\supercite{xujie2021federated}的概述。
+
+尽管Kulkarni等人\supercite{kulkarni2020survey}提供了对处理Non-IID数据的个性化方法的简要介绍，但现有工作没有详细探讨Non-IID数据对FL的影响。为了填补这一空白，本文致力于对Non-IID数据上的FL进行全面调查，包括对各种数据分布的深入分析、它们对模型聚合的影响、现有处理偏斜数据分布技术的分类及其优缺点的讨论，以及FL面临的Non-IID数据的剩余挑战和未来研究的概述。
+
+FL是一个快速发展的主题，我们在这里只讨论与之密切相关的方法。关于这一领域的综合性研究已经在文献\supercite{kairouz2019advances, li2019federated}中出现。通常的FL设置包括两种类型的更新，即服务器和设备更新，每种更新都与最小化某些局部损失函数相关，这个函数本身可能会在不同的轮次中动态更新。在任何轮次中，都有方法尝试进行完全优化，或者提出不精确优化。我们特别关注那些解决四种FL场景（大规模分布、异质性、不可靠链接和不平衡数据）的相关工作。
+
+一系列工作提出基于局部SGD\supercite{stich2019local}的更新，其中每个参与设备执行单个局部SGD步骤。然后服务器平均收到的模型。与局部SGD相比，我们的方法提出最小化一个局部惩罚的经验损失。
+
+shortfedAvg\supercite{mcmahan2017communication}是局部SGD的一个泛化，它提出了每轮更多的局部SGD步骤。尽管如此，shortfedAvg在设备端优化的解决方案是不精确的。确定何时停止最小化，以便获得良好的准确性-通信权衡，是基于调整轮次数和学习率\supercite{mcmahan2017communication, Li2020On}。尽管shortfedAvg在IID设置中具有强大的实证性能，但在非IID场景中性能下降\supercite{zhao2018federated}。
+
+为了处理非IID设置，提出了shortfedAvg的几种修改版本。这些变体包括使用递减的学习率\supercite{Li2020On}；动态修改设备经验损失\supercite{li2018federated}；或修改服务器端更新\supercite{hsu2019measuring, reddi2020adaptive}。使用递减学习率或自定义服务器端更新的方法仍然依赖于设备内的局部SGD更新。虽然这些工作确实认识到局部和全局静止点的不兼容性，但他们提出的解决方案是基于不精确的最小化。此外，为了在非IID情况下建立收敛性，这些工作施加了额外的“有界非IID”条件。
+
+shortfedProx\supercite{li2018federated}与我们的方法相关。像我们一样，他们提出了一个动态调节器，这个调节器基于服务器提供的模型进行修改。这个调节器惩罚与服务器模型相距较远的更新。尽管如此，结果中的调节器并没有使全局和局部静止点对齐，因此需要不精确的最小化，并且他们通过仔细选择学习率和轮次来实现。此外，调整需要一些关于统计异质性的知识。
+
+在类似的方向上，有工作通过添加额外的设备变量来增强更新，这些变量也与模型一起传输\supercite{karimireddy2019scaffold,shamir2014communication}。这些工作通过添加设备依赖的调节器来证明收敛保证。尽管如此，他们遭受额外的通信成本，并且他们没有在深度神经网络上进行广泛的实验。其中，scaf\supercite{karimireddy2019scaffold}是一个与我们工
+
+作密切相关的工作，尽管它传输了额外的变量，并且在第\ref{sec:problem}节中给出了更详细的比较。
+
+另一系列分布式优化方法\supercite{konevcny2016federated, makhdoumi2017convergence, shamir2014communication, yuan2020federated, pathak2020fedsplit, liang2019variance, li2020acceleration, condat2020distributed}
+可以在这种设置中考虑。此外，有工作将SGD类型方法的分析扩展到FL设置\supercite{unif_1,unif_2,unif_3}。然而，这些算法是为全设备参与案例提出的，这不符合FL的一个重要方面。FedSVRG\supercite{konevcny2016federated}和DANE\supercite{shamir2014communication}需要在每一轮从所有设备获取梯度信息，并且它们不能直接应用于部分FL设置。例如，FedDANE\supercite{li2019feddane}是DANE的一个版本，适用于部分参与。然而，FedDANE在部分参与情况下的实证表现不如FedAvg\supercite{li2019feddane}。与这些工作类似，FedPD\supercite{zhang2020fedpd}方法是在不同参与概念下提出的分布式优化方法。FedPD在每一轮要么激活所有设备要么不激活任何设备，这再次不满足FL中的部分参与。
+
+最后，另一组工作旨在通过压缩传输模型来减少通信成本\supercite{dutta2019discrepancy, mishchenko2019distributed, alistarh2017qsgd}。他们通过降低传输的比特率来节省通信成本。这些想法是我们工作的补充，它们可以集成到我们提出的解决方案中。
+
 %\label{sec:***} 可标注label
+
+
+\section{研究内容和主要贡献}
+\ensection{Research Content and Main Contributions}
+
+因此本文的主要贡献可以总结如下：
+
+(1)提出了一种新的联邦学习框架，该框架可以在不共享数据的前提下实现大规模模型的高效训练。
+
+(2)设计了一种数据分布自适应的学习方法，该方法可以消除非独立同分布数据对模型训练的影响。
+
+(3)提出了SimLoss，一种新的损失函数，该损失函数可以在大规模模型训练中提高模型的性能。
+
+(4)设计了一种新的router路由方式，大大减少了moe中drop token的数量。
 
 \section{本文主要内容和章节安排}
 \ensection{Major Contents and Chapter Arrangement}
@@ -37,6 +97,7 @@
 
 
 \subsection{形状记忆聚氨酯的研究进展}
+\ensubsection{Research Progress of Shape Memory Polyurethane}
 %\label{sec:requirements}
 首例SMPU是日本Mitsubishi公司开发成功的……。
 
