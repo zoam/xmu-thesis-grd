@@ -78,7 +78,9 @@
 \def\xmu@label@enacknowledgements{Acknowledgements}
 \def\xmu@label@contents{目~~~~录}
 \def\xmu@label@compactcontents{目录}
-\def\xmu@label@encontents{Contents}
+\def\xmu@label@encontents{Table of Contents}
+\def\xmu@label@encontentszh{Table of Contents in Chinese}
+\def\xmu@label@encontentsen{Table of Contents in English}
 \def\xmu@label@acronymlist{主要缩略词表}
 \def\xmu@label@symbollist{主要符号表}
 \def\xmu@label@enacronymlist{List of Acronyms}
@@ -274,8 +276,9 @@
 
 %% 设置英文字体
 \RequirePackage{xltxtra} % \XeTeX Logo
+\RequirePackage{mathptmx} % 替换数学字体为近似Times字体
 \setmainfont{Times New Roman}
-\setsansfont{Arial}
+\setsansfont{Arial} % 若要求统一为Times New Roman，请修改为\setsansfont{Times New Roman}
 \setmonofont{Times New Roman}
 
 %% 中文破折号
@@ -323,7 +326,7 @@
 %% 设置章节格式（一倍行距为字体大小 × 1.297(1.3) × 1.25）
 \ctexset{chapter={
 			name = {第,章},
-			number = {\arabic{chapter}},
+			number = {\arabic{chapter}}, % 若规定采用汉字章号，请修改为\chinese{chapter}
 			format = {\bfseries \sffamily \heiti \centering \zihao{-3}},
 			pagestyle = {xmu@headings},
 			beforeskip = 15pt,
@@ -642,7 +645,7 @@
 
 % 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	
-	\addcontentsline{etoc}{chapter}{\sffamily \encontentsname}
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@encontentszh} %将中文目录加入到英文目录中
 % 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	
 	\makeatletter
@@ -679,6 +682,9 @@
 	\pdfbookmark[0]{\encontentsname}{english_contents}
 	
 	\markboth{\encontentsname}{\encontentsname} % 修改页眉文字
+
+	\addcontentsline{toc}{chapter}{\xmu@label@encontents} % 将英文目录加入到中文目录中
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@encontentsen} % 将英文目录加入到英文目录中
 	
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}
