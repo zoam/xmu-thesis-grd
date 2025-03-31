@@ -78,7 +78,8 @@
 \def\xmu@label@enacknowledgements{Acknowledgements}
 \def\xmu@label@contents{目~~~~录}
 \def\xmu@label@compactcontents{目录}
-\def\xmu@label@encontents{Table of Contents}
+%\def\xmu@label@encontents{Table of Contents}
+\def\xmu@label@encontents{Contents}
 \def\xmu@label@encontentszh{Table of Contents in Chinese}
 % \def\xmu@label@encontentsen{Table of Contents in English}
 \def\xmu@label@encontentsen{Contents}
