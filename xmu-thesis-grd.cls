@@ -749,7 +749,7 @@
 %% 参考文献风格
 \RequirePackage[sort&compress]{gbt7714}
 \bibliographystyle{reference/gbt7714-numerical} 
-\citestyle{super}
+\citestyle{numbers}
 
 %% 引用文献序号的排序与压缩
 \newcommand{\supercite}[1]{{\citestyle{super}\cite{#1}}} % 上标引用
