@@ -78,11 +78,9 @@
 \def\xmu@label@enacknowledgements{Acknowledgements}
 \def\xmu@label@contents{目~~~~录}
 \def\xmu@label@compactcontents{目录}
-%\def\xmu@label@encontents{Table of Contents}
 \def\xmu@label@encontents{Contents}
-\def\xmu@label@encontentszh{Table of Contents in Chinese}
-% \def\xmu@label@encontentsen{Table of Contents in English}
-\def\xmu@label@encontentsen{Contents}
+\def\xmu@label@encontentszh{Contents-Chinese}
+\def\xmu@label@encontentsen{Contents-English}
 \def\xmu@label@acronymlist{主要缩略词表}
 \def\xmu@label@symbollist{主要符号表}
 \def\xmu@label@enacronymlist{List of Acronyms}
@@ -647,7 +645,7 @@
 
 % 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	
-	% \addcontentsline{etoc}{chapter}{\sffamily \xmu@label@encontentszh} %将中文目录加入到英文目录中
+	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@encontentszh} %将中文目录加入到英文目录中
 % 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
 	
 	\makeatletter
@@ -685,7 +683,7 @@
 	
 	\markboth{\encontentsname}{\encontentsname} % 修改页眉文字
 
-	% \addcontentsline{toc}{chapter}{\xmu@label@encontents} % 将英文目录加入到中文目录中
+	\addcontentsline{toc}{chapter}{\xmu@label@encontents} % 将英文目录加入到中文目录中
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@encontentsen} % 将英文目录加入到英文目录中
 	
 	\makeatletter

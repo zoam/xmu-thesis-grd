@@ -11,6 +11,11 @@
 \documentclass[twoside, pdf]{xmu-thesis-grd}
 
 % 模板选项： 硕士论文 master； 博士论文 doctor; 直接使用学校doc文档转换的pdf页面 pdf
+% 选项推荐使用说明：
+% 日常编辑：oneside; 查重去除空白页：oneside
+% 形式审查和打印稿：twoside
+
+% 编译说明：对于中文排版，请使用XeLaTeX编译器；
 
 % 导入缩写词表
 \input{chapters/acronym_list}
@@ -39,13 +44,18 @@
 \makecover
 
 % 学位论文原创性声明
+% 如果需要修改这部分的内容，请调整 xmu-thesis-grd.cls L43-L46
+% 如果需要使用指定的pdf. 请调整 xmu-thesis-grd.cls L194-L217
+% 注释掉if-else 语句，只保留 \includepdf[pages=-]{pdf_files/originality_statement.pdf}
 \makeoriginalitystatement
 
 % 学位论文著作权使用声明
+% 如果需要修改这部分的内容，请调整 xmu-thesis-grd.cls L48-L56
+% 如果需要使用指定的pdf. 请调整 xmu-thesis-grd.cls L217-L238
+% 注释掉if-else 语句，只保留 \includepdf[pages=-]{pdf_files/copyright_statement.pdf}
 \makecopyrightstatement
 
-% 学位论文答辩委员会名单
-\makenamelist
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 前置部分
@@ -97,6 +107,11 @@
 %% 后置部分
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \backmatter
+
+% 学位论文答辩委员会名单
+% 如果需要调节这部分的内容，请修改chapters/name_list
+\makenamelist
+
 
 % 致谢
 \input{chapters/acknowledgements}
