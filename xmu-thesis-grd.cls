@@ -58,7 +58,7 @@
 %% 学位论文答辩委员会名单
 \def\xmu@label@namelist@title{学位论文答辩委员会名单}
 
-%% 定义一些标签 
+%% 定义一些标签
 \def\xmu@label@namelist{学位论文答辩委员会名单}
 \def\xmu@label@abstract{摘~~~~要}
 \def\xmu@label@compactabstract{摘要}
@@ -105,7 +105,7 @@
 \def\xmu@value@studentnumber{200215001}
 \ifxmu@master
 	\def\xmu@value@thesistype{硕~~~~士~~~~学~~~~位~~~~论~~~~文}
-\else 
+\else
 	\def\xmu@value@thesistype{博~~~~士~~~~学~~~~位~~~~论~~~~文}
 \fi
 \def\xmu@value@title{资产重组：一个资不抵债国有企业的最佳选择}
@@ -147,45 +147,45 @@
 		\includepdf[pages=-]{pdf_files/cover.pdf}
 	\else
 
-	{\bfseries \songti \zihao{-4} \noindent \xmu@label@schoolserialnumber \xmu@value@schoolserialnumber}  \\
-	{\bfseries \songti \zihao{-4} \xmu@label@studentnumber \xmu@value@studentnumber}
+		{\bfseries \songti \zihao{-4} \noindent \xmu@label@schoolserialnumber \xmu@value@schoolserialnumber}  \\
+		{\bfseries \songti \zihao{-4} \xmu@label@studentnumber \xmu@value@studentnumber}
 
-	\vskip 20pt
+		\vskip 20pt
 
-	\begin{figure}[htb!]
-		\centering
-		\includegraphics[width=4.82cm]{figures/xmu-logo.pdf}
-	\end{figure}
+		\begin{figure}[htb!]
+			\centering
+			\includegraphics[width=4.82cm]{figures/xmu-logo.pdf}
+		\end{figure}
 
-	\begin{center}
-		{\bfseries \songti \zihao{2} \xmu@value@thesistype}
-		\vskip 35pt
-			{\bfseries \heiti \zihao{-2} \xmu@value@title}
-		\vskip 15pt
-			{\bfseries \zihao{3} \xmu@value@entitle}
-		\vskip 55pt
-			{\bfseries \kaishu \zihao{-2} \xmu@value@author}
-		\vskip 30pt
+		\begin{center}
+			{\bfseries \songti \zihao{2} \xmu@value@thesistype}
+			\vskip 35pt
+				{\bfseries \heiti \zihao{-2} \xmu@value@title}
+			\vskip 15pt
+				{\bfseries \zihao{3} \xmu@value@entitle}
+			\vskip 55pt
+				{\bfseries \kaishu \zihao{-2} \xmu@value@author}
+			\vskip 30pt
 
-			{\kaishu \zihao{-3}
-				\begin{tabular}{r p{1mm} l}
-					\xmu@label@advisor    &  & \xmu@value@advisor
-					\\
-					\xmu@label@major      &  & \xmu@value@major
-					\\
-					\xmu@label@submitdate &  & \xmu@value@submitdate
-					\\
-					\xmu@label@defenddate &  & \xmu@value@defenddate
-					\\
-					\xmu@label@grantdate  &  & \xmu@value@grantdate
-				\end{tabular}}
+				{\kaishu \zihao{-3}
+					\begin{tabular}{r p{1mm} l}
+						\xmu@label@advisor    &  & \xmu@value@advisor
+						\\
+						\xmu@label@major      &  & \xmu@value@major
+						\\
+						\xmu@label@submitdate &  & \xmu@value@submitdate
+						\\
+						\xmu@label@defenddate &  & \xmu@value@defenddate
+						\\
+						\xmu@label@grantdate  &  & \xmu@value@grantdate
+					\end{tabular}}
 
-		\vskip 100pt
-			{\bfseries \songti \zihao{-4} \xmu@value@printdate}
-	\end{center}
+			\vskip 100pt
+				{\bfseries \songti \zihao{-4} \xmu@value@printdate}
+		\end{center}
 
-	\vskip \stretch{0.5}
-		
+		\vskip \stretch{0.5}
+
 	\fi
 
 	\clearpage
@@ -196,7 +196,7 @@
 	\cleardoublepage
 	\pdfbookmark[0]{原创性声明}{originality_statement}
 	\thispagestyle{empty}
-	
+
 	\setstretch{2.2}
 	\ifxmu@pdf
 		\includepdf[pages=-]{pdf_files/originality_statement.pdf}
@@ -212,7 +212,7 @@
 		\vskip 20pt
 		\hspace{8.4cm} {\zihao{4}\xmu@label@originality@signdate}
 	\fi
-	
+
 	\clearpage
 }
 
@@ -221,12 +221,12 @@
 	\cleardoublepage
 	\pdfbookmark[0]{著作权使用声明}{copyright_statement}
 	\thispagestyle{empty}
-	
+
 	\setstretch{2.2}
 	\ifxmu@pdf
 		\includepdf[pages=-]{pdf_files/copyright_statement.pdf}
 	\else
- 		\begin{center}
+		\begin{center}
 			{\bfseries \heiti \zihao{-2} \xmu@label@copyright@title}
 		\end{center}
 		\vskip 10pt
@@ -243,10 +243,10 @@
 %% 学位论文答辩委员会名单
 \newenvironment{namelist}{
 	\cleardoublepage
-	
+
 	\thispagestyle{plain}
 	\thispagestyle{empty}
-	
+
 	\songti\zihao{4}
 	\setstretch{1.58889} % 设置行间距
 }
@@ -255,7 +255,7 @@
 	\cleardoublepage
 	\pdfbookmark[0]{学位论文答辩委员会名单}{name_list}
 	\thispagestyle{empty}
-	
+
 	\ifxmu@pdf
 		\includepdf[pages=-]{pdf_files/name_list.pdf}
 	\else
@@ -300,7 +300,7 @@
 	bottom = 3cm,%
 	left = 3cm,%
 	right = 3cm,%
-	headsep = 0.34cm,% 
+	headsep = 0.34cm,%
 	footskip = 0.8cm%
 ]{geometry}
 
@@ -313,39 +313,39 @@
 \newcounter{blankpage}
 \def\cleardoublepage{
 	\clearpage
-	\if@twoside 
-		\ifodd 
-			\c@page 
+	\if@twoside
+		\ifodd
+			\c@page
 		\else
 			\stepcounter{blankpage}%
 			\hbox {}\newpage
-		\fi 
-	\fi 
+		\fi
+	\fi
 }
 
 %% 设置章节格式（一倍行距为字体大小 × 1.297(1.3) × 1.25）
 \ctexset{chapter={
-			name = {第,章},
-			number = {\arabic{chapter}}, % 若规定采用汉字章号，请修改为\chinese{chapter}
-			format = {\bfseries \sffamily \heiti \centering \zihao{-3}},
-			pagestyle = {xmu@headings},
-			beforeskip = 15pt,
-			afterskip = 25pt,
-			fixskip = true,
-			aftername = ~~~~,
-		}
+	  name = {第,章},
+	  number = {\arabic{chapter}}, % 若规定采用汉字章号，请修改为\chinese{chapter}
+	  format = {\bfseries \sffamily \heiti \centering \zihao{-3}},
+	  pagestyle = {xmu@headings},
+	  beforeskip = 15pt,
+	  afterskip = 25pt,
+	  fixskip = true,
+	  aftername = ~~~~,
+	 }
 }
 
 %% 设置一级章节格式
 \ctexset{section={
-			format={\raggedright \sffamily \bfseries \heiti \zihao{4}},
-			beforeskip = 25pt,
-			afterskip = 20pt,
-			fixskip = true,
-		}
+	  format={\raggedright \sffamily \bfseries \heiti \zihao{4}},
+	  beforeskip = 25pt,
+	  afterskip = 20pt,
+	  fixskip = true,
+	 }
 }
 
-%% 设置二级标题格式 
+%% 设置二级标题格式
 \ctexset{subsection={
 			format = {\bfseries \sffamily \heiti \raggedright \zihao{-4}},
 			beforeskip = 20pt,
@@ -406,9 +406,9 @@
 %% 算法
 \RequirePackage{algorithm}
 \RequirePackage{algorithmic}
-\floatname{algorithm}{算法}  
-\renewcommand{\algorithmicrequire}{\textbf{输入:}}  
-\renewcommand{\algorithmicensure}{\textbf{输出:}} 
+\floatname{algorithm}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{输入:}}
+\renewcommand{\algorithmicensure}{\textbf{输出:}}
 
 %% 定理
 \theoremstyle{plain}
@@ -547,13 +547,13 @@
 	\fancyhead[CE]{\zihao{5} \songti {\xmu@value@title}}
 }
 
-%% 脚注样式 
+%% 脚注样式
 % 设置圈型角标
 \interfootnotelinepenalty=100000
 \RequirePackage{pifont}
 \RequirePackage[hang,flushmargin,perpage,symbol*]{footmisc}
 \DefineFNsymbols{circled}{{\ding{192}}{\ding{193}}{\ding{194}}
-{\ding{195}}{\ding{196}}{\ding{197}}{\ding{198}}{\ding{199}}{\ding{200}}{\ding{201}}}
+		{\ding{195}}{\ding{196}}{\ding{197}}{\ding{198}}{\ding{199}}{\ding{200}}{\ding{201}}}
 \setfnsymbol{circled}
 
 % 设置角标数字的字体和正文一致，并且1.5字符缩进
@@ -572,10 +572,10 @@
 		\addcontentsline{toc}{chapter}{\xmu@label@abstract} % 将摘要加入到目录中
 		\markboth{\xmu@label@abstract}{\xmu@label@abstract} % 页眉
 	\fi
-	
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
+
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@abstractincontent}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\thepage}{chapter.\thechapter}}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily  \xmu@label@abstractincontent}{\thepage}{chapter.\thechapter}}
 	\songti\zihao{-4}
 }
 
@@ -587,9 +587,9 @@
 	\setstretch{1.38889}
 	\cleardoublepage
 	\chapter{\xmu@label@enabstract}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\sffamily \thepage}{chapter.\thechapter}}
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@enabstractincontent}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\thepage}{chapter.\thechapter}}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \xmu@label@enabstractincontent}{\thepage}{chapter.\thechapter}}
 	\zihao{-4}
 }
 
@@ -599,30 +599,30 @@
 %% 设置目录各级标题样式
 \RequirePackage{titletoc}
 \titlecontents{chapter}[0pt]
-	{\contentsmargin{0mm} \bfseries \heiti \zihao{4} \setlength{\baselineskip}{25pt}}
-	{\thecontentslabel\hspace{\ccwd}}
-	{\bfseries}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
+{\contentsmargin{0mm} \bfseries \heiti \zihao{4} \setlength{\baselineskip}{25pt}}
+{\thecontentslabel\hspace{\ccwd}}
+{\bfseries}
+{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 \titlecontents{section}[1\ccwd]
-	{\contentsmargin{0mm} \bfseries \heiti \zihao{-4} \setlength{\baselineskip}{25pt}}
-	{\thecontentslabel\hspace{\ccwd}}
-	{\bfseries}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
+{\contentsmargin{0mm} \bfseries \heiti \zihao{-4} \setlength{\baselineskip}{25pt}}
+{\thecontentslabel\hspace{\ccwd}}
+{\bfseries}
+{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 \titlecontents{subsection}[2\ccwd]
-	{\contentsmargin{0mm} \songti \zihao{-4} \setlength{\baselineskip}{25pt}}
-	{\thecontentslabel\hspace{\ccwd}}
-	{}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
+{\contentsmargin{0mm} \songti \zihao{-4} \setlength{\baselineskip}{25pt}}
+{\thecontentslabel\hspace{\ccwd}}
+{}
+{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 
 %% 设置图索引样式
 \titlecontents{figure}[0pt]{\songti\zihao{-4}}
-	{\parbox[t]{1.55cm}{\figurename~\thecontentslabel}}{\hspace*{-1.5cm}}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
+{\parbox[t]{1.55cm}{\figurename~\thecontentslabel}}{\hspace*{-1.5cm}}
+{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 
 %% 设置表索引样式
 \titlecontents{table}[0pt]{\songti\zihao{-4}}
-	{\parbox[t]{1.55cm}{\tablename~\thecontentslabel}}{\hspace*{-1.5cm}}
-	{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
+{\parbox[t]{1.55cm}{\tablename~\thecontentslabel}}{\hspace*{-1.5cm}}
+{\hspace{.5em}\titlerule*{\zihao{-4} \normalfont.} {\normalfont \zihao{-4} \thecontentspage}}
 
 
 %% 中英文目录
@@ -632,7 +632,7 @@
 %% 中文目录
 \renewcommand\tableofcontents{
 	\setstretch{1} % 设置行间距
-	
+
 	\chapter*{\contentsname}
 
 	\ifxmu@compact
@@ -643,11 +643,11 @@
 		\addcontentsline{toc}{chapter}{\xmu@label@contents} %将中文摘要加入到目录中
 	\fi
 
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
-	
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\sffamily \thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
+
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@encontentszh} %将中文目录加入到英文目录中
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
-	
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily \encontentsname}{\thepage}{chapter.\thechapter}} %将Contents加入到英文目录中
+
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}
 	\makeatother
@@ -661,13 +661,13 @@
 \newcommand\enchapter[1]{\addtocontents{etoc}
 	{\protect\contentsline{chapter}
 		{\protect\numberline{\sffamily Chapter \thechapter}#1}
-% 		{\sffamily \thepage}{chapter.\thechapter}}
+		% 		{\sffamily \thepage}{chapter.\thechapter}}
 		{\thepage}{chapter.\thechapter}}
 }
 \newcommand\ensection[1]{\addtocontents{etoc}
 	{\protect\contentsline{section}
 		{\protect\numberline{\sffamily \thesection}#1}
-% 		{\sffamily \thepage}{section.\thesection}}
+		% 		{\sffamily \thepage}{section.\thesection}}
 		{\thepage}{section.\thesection}}
 }
 \newcommand\ensubsection[1]{\addcontentsline{etoc}{subsection}{\protect\numberline{\thesubsection}#1}}
@@ -678,14 +678,14 @@
 	\setstretch{1} % 设置行间距
 
 	\chapter*{\sffamily\encontentsname}
-	
+
 	\pdfbookmark[0]{\encontentsname}{english_contents}
-	
+
 	\markboth{\encontentsname}{\encontentsname} % 修改页眉文字
 
 	\addcontentsline{toc}{chapter}{\xmu@label@encontents} % 将英文目录加入到中文目录中
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@encontentsen} % 将英文目录加入到英文目录中
-	
+
 	\makeatletter
 	\renewcommand{\@pnumwidth}{0em}
 	\makeatother
@@ -694,15 +694,55 @@
 	\clearpage
 }
 
-\RequirePackage{glossaries-cn}
+\RequirePackage{glossaries}
+\RequirePackage{booktabs}
+\glsdisablehyper % 禁用缩略词跳转
+
+\newacronymstyle{acronym-cn}{%
+	\ifglshaslong{\glslabel}{\glsgenacfmt}{\glsgenentryfmt}%
+}{
+	\renewcommand*{\GenericAcronymFields}{%
+		first={\the\glslongtok\space\protect\paren{\the\glsshorttok}},%
+		description={\the\glslongtok}}
+	\renewcommand*{\genacrfullformat}[2]{%
+		\glsentrydesc{##1}~（\glsentrylong{##1}，%
+		\glsentryshort{##1}）%
+	}
+	\renewcommand*{\acronymentry}[1]{%
+		\acronymfont{\glsentryshort{##1}}%
+	}
+}
+\setacronymstyle{acronym-cn}
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\newglossarystyle{chinese}{
+	\setlength{\glsdescwidth}{.35\textwidth}
+	\setlength{\glspagelistwidth}{.35\textwidth}
+	\renewenvironment{theglossary}%
+	{\vspace{-5mm}\begin{longtable}{@{\extracolsep{\fill}}lp{\glsdescwidth}p{\glspagelistwidth}}\toprule[1.0pt]}%
+		{\bottomrule[1.0pt]\end{longtable}}%
+	\renewcommand*{\glossaryheader}{%
+		\heiti 缩略词 &\heiti 英文全称 &
+		\heiti 中文全称 \tabularnewline \midrule[0.2pt] \endhead}%
+	\renewcommand*{\glsgroupheading}[1]{}%
+	\renewcommand{\glossentry}[2]{
+		\glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}} &
+		\glsentrylong{##1} & \glsentrydesc{##1}\tabularnewline
+	}
+	\renewcommand*{\subglossentry}[3]{
+		\glossentry{##2}{##3}}
+}
 
 %% 缩略词表
 \newcommand\makeacronymlist{
 	\setstretch{1.5}
 	\markboth{\xmu@label@acronymlist}{\xmu@label@acronymlist} % 页眉
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@enacronymlist}
-	\printacronymlist
-	
+
+	\pdfbookmark{主要缩略词表}{glossary}
+	\printglossary[style=chinese, title={\protect\centering 主要缩略词表}, nonumberlist, nogroupskip]
+
 	\clearpage
 }
 
@@ -711,44 +751,34 @@
 	\setstretch{1.5}
 	\markboth{\xmu@label@symbollist}{\xmu@label@symbollist} % 页眉
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@ensymbollist}
-	\printsymbollist
+	\input{chapters/symbol_list.tex}
 	\clearpage
 }
 
-\glssetup{
-	term list title    = \xmu@label@acronymlist,
-	symbol list title  = \xmu@label@symbollist,
-	list level         = chapter,
-	term color         = black,
-	symbol color       = black,
-	list head distance = -3.6em
-}
-
-
 %% 图索引
 \newcommand\makefigurelist{
-% 	\pdfbookmark[0]{\xmu@label@figurelist}{figure_list}
+	% 	\pdfbookmark[0]{\xmu@label@figurelist}{figure_list}
 	{\renewcommand{\addvspace}[1]{}
-		\listoffigures}
+			\listoffigures}
 	\addcontentsline{toc}{chapter}{\xmu@label@figurelist}
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@enfigurelist}
-	
+
 }
 
 %% 表索引
 \newcommand\maketablelist{
-% 	\pdfbookmark[0]{\xmu@label@tablelist}{table_list}
+	% 	\pdfbookmark[0]{\xmu@label@tablelist}{table_list}
 	{\renewcommand{\addvspace}[1]{}
-		\listoftables}
+			\listoftables}
 	\addcontentsline{toc}{chapter}{\xmu@label@tablelist}
 	\addcontentsline{etoc}{chapter}{\sffamily \xmu@label@entablelist}
-	
+
 }
 
 
 %% 参考文献风格
 \RequirePackage[sort&compress]{gbt7714}
-\bibliographystyle{reference/gbt7714-numerical} 
+\bibliographystyle{reference/gbt7714-numerical}
 \citestyle{numbers}
 
 %% 引用文献序号的排序与压缩
@@ -759,9 +789,9 @@
 	\zihao{5}
 	\setlength{\baselineskip}{16pt}
 	\chapter*{\bibname}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\sffamily \thepage}{chapter.\thechapter}}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\sffamily \thepage}{chapter.\thechapter}}
 	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enreference}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\thepage}{chapter*.\thepage}}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enreference}{\thepage}{chapter*.\thepage}}
 	\markboth{\bibname}{\bibname}%
 	\addcontentsline{toc}{chapter}{\xmu@label@reference}
 	\vspace{3pt}
@@ -794,10 +824,10 @@
 	\setlength{\baselineskip}{21pt}
 	\chapter*{\xmu@label@publications}
 	\pdfbookmark[0]{在学期间完成的相关学术成果}{publications}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\sffamily {\thepage}}{chapter.\thechapter}}
-        \addcontentsline{toc}{chapter}{\xmu@label@publications}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\sffamily {\thepage}}{chapter.\thechapter}}
+	\addcontentsline{toc}{chapter}{\xmu@label@publications}
 	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enpublications}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\thepage}{chapter*.\thepage}}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enpublications}{\thepage}{chapter*.\thepage}}
 	\markboth{\MakeUppercase\xmu@label@publications}
 	{\MakeUppercase\xmu@label@publications}%
 	\list{\@biblabel{\@arabic\c@enumiv}}%
@@ -826,7 +856,7 @@
 	\item[]\vspace{0.75cm}\hspace{-\labelwidth}\hspace{-\labelsep}{\heiti  \bfseries #1}
 }
 
-%% 致谢 
+%% 致谢
 \newenvironment{acknowledgements}{
 	\cleardoublepage
 	\chapter*{\xmu@label@acknowledgements}
@@ -838,10 +868,10 @@
 		\markboth{\xmu@label@acknowledgements}{\xmu@label@acknowledgements} % 页眉
 		\addcontentsline{toc}{chapter}{\xmu@label@acknowledgements}
 	\fi
-	
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\sffamily \thepage}{chapter.\thechapter}}
+
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\sffamily \thepage}{chapter.\thechapter}}
 	\addcontentsline{etoc}{chapter}{\sffamily\xmu@label@enacknowledgements}
-% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\thepage}{chapter*.\thepage}}
+	% 	\addtocontents{etoc}{\protect\contentsline{chapter}{\sffamily\xmu@label@enacknowledgements}{\thepage}{chapter*.\thepage}}
 	\songti
 }
 

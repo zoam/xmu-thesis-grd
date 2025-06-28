@@ -9,19 +9,22 @@
 % 默认单面打印 oneside 、硕士论文模板 master
 
 \documentclass[twoside, pdf]{xmu-thesis-grd}
+\makeglossaries
+% 模板选项使用说明
+% 硕士论文：master
+% 博士论文：doctor
+% 直接使用学校 doc 文档转换的 pdf 页面：pdf
+% 日常编辑（单面打印模式）：oneside;
+% 查重去除空白页（单面打印模式）：oneside
+% 形式审查和打印稿（双面打印模式）：twoside
 
-% 模板选项： 硕士论文 master； 博士论文 doctor; 直接使用学校doc文档转换的pdf页面 pdf
-% 选项推荐使用说明：
-% 日常编辑：oneside; 查重去除空白页：oneside
-% 形式审查和打印稿：twoside
-
-% 编译说明：对于中文排版，请使用XeLaTeX编译器；
+% 编译说明：对于中文排版，请使用 XeLaTeX 编译器；
 
 % 导入缩写词表
 \input{chapters/acronym_list}
 
-% 导入缩写词表
-\input{chapters/symbol_list}
+% 导入符号表
+% \input{chapters/symbol_list}
 
 \begin{document}
 
@@ -45,17 +48,15 @@
 
 % 学位论文原创性声明
 % 如果需要修改这部分的内容，请调整 xmu-thesis-grd.cls L43-L46
-% 如果需要使用指定的pdf. 请调整 xmu-thesis-grd.cls L194-L217
-% 注释掉if-else 语句，只保留 \includepdf[pages=-]{pdf_files/originality_statement.pdf}
+% 如果需要使用指定的 pdf，请调整 xmu-thesis-grd.cls L194-L217
+% 注释掉 if-else 语句，只保留 \includepdf[pages=-]{pdf_files/originality_statement.pdf}
 \makeoriginalitystatement
 
 % 学位论文著作权使用声明
 % 如果需要修改这部分的内容，请调整 xmu-thesis-grd.cls L48-L56
-% 如果需要使用指定的pdf. 请调整 xmu-thesis-grd.cls L217-L238
-% 注释掉if-else 语句，只保留 \includepdf[pages=-]{pdf_files/copyright_statement.pdf}
+% 如果需要使用指定的 pdf，请调整 xmu-thesis-grd.cls L217-L238
+% 注释掉 if-else 语句，只保留 \includepdf[pages=-]{pdf_files/copyright_statement.pdf}
 \makecopyrightstatement
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 前置部分
@@ -111,7 +112,6 @@
 % 学位论文答辩委员会名单
 % 如果需要调节这部分的内容，请修改chapters/name_list
 \makenamelist
-
 
 % 致谢
 \input{chapters/acknowledgements}
